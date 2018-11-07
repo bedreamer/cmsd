@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>电池堆信息总览</title>
+    <meta http-equiv="refresh" content="15">
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "bms/base-堆tab列表模板.html" %}
+                    </div>
+                </div>
+
+                {% include "bms/base-报表时间段选择模板.html" %}
+
+                <div class="row">
+                    <div class="col-sm-3 text-center">
+                        <div class="panel panel-success">
+                            <div class="panel-heading text-center">
+                                 <strong style="font-size: 50px">{{ bms.电池组数 }}</strong> 组
+                            </div>
+                            <span>电池组数</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 text-center">
+                        <div class="panel panel-info">
+                            <div class="panel-heading text-center">
+                                 <strong style="font-size: 50px">{{ bms.电池堆电压 }}</strong> v
+                            </div>
+                            <span>堆电压</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 text-center">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading text-center">
+                                 <strong style="font-size: 50px">{{ bms.电池堆电流 }}</strong> A
+                            </div>
+                            <span>堆电流</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 text-center">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                 <strong style="font-size: 50px">{{ bms.电池堆SOC }}</strong> %
+                            </div>
+                            <span>堆SOC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            <div><strong>统计数据</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5">
+                        <!--累计充电容量-->
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4>&nbsp;&nbsp; 累计充电量</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-11 text-right">
+                                            <h2><span class="glyphicon glyphicon-cloud-download"></span> {{ bms.累计充电容量 }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-right">
+                            kWh
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-5">
+                        <!--累计放电容量-->
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4>&nbsp;&nbsp; 累计放电量</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-11 text-right">
+                                            <h2><span class="glyphicon glyphicon-cloud-upload"></span> {{ bms.累计放电容量 }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-right">
+                            kWh
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

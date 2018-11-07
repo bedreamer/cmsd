@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>事件记录</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+
+        {% if records_count == 0 %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-striped table-condensed table-responsive table-hover text-center">
+                        <caption>
+                            {% include "history/base-历史事件入口列表.html" %}
+                        </caption>
+                    </table>
+                </div>
+            </div>
+            <div class="alert alert-success" role="alert">还没有事件记录！</div>
+        {% else %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-striped table-condensed table-responsive table-hover text-center">
+                        <caption>
+                            {% include "history/base-历史事件入口列表.html" %}
+                        </caption>
+                        <tr class="info">
+                            <th>#</th>
+                            <th>事件ID</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>代码</th>
+                            <th>来源类型</th>
+                            <th>级别</th>
+                            <th>内容</th>
+                            <th>确认</th>
+                        </tr>
+                        {% for record in records_list %}
+                        {% if record.code == 4 %}
+                        <tr style="font-size: 12px" class="success">
+                        {% elif record.code == 0 %}
+                        <tr style="font-size: 12px" class="danger">
+                        {% elif record.code == 1 %}
+                        <tr style="font-size: 12px" class="warning">
+                        {% elif record.code == 8 or record.code == 9 %}
+                        <tr style="font-size: 12px" class="info">
+                        {% else %}
+                        <tr style="font-size: 12px">
+                        {% endif %}
+                            <th>{{ record.id }}</th>
+                            <td><a href="/history/show/?ueid={{ record.ueid }}">{{ record.ueid }}</a></td>
+                            <td>{{ record.etsp_begin | date:"Y-m-d H:i:s" }}</td>
+                            <td>{{ record.etsp_end | date:"Y-m-d H:i:s" }}</td>
+                            <td>{{ record.ecode }}</td>
+                            <td>{{ record.eclass }}</td>
+                            <td>{{ record.elevel }}</td>
+                            <td>{{ record.abstrct }}</td>
+                            <td>
+                                {% if record.econfirm_user == '' %}
+                                    <a href="/history/confirm/?ueid={{ record.ueid }}">确认</a>
+                                {% else %}
+                                    <a href="/history/show/?ueid={{ record.ueid }}">{{ record.econfirm_user }}</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+        {% if pages_count > 1 %}
+            <div class="row text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="{{ request.path }}" aria-label="top">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% for page in page_list %}
+                        <li {% if page == show_page %}class="active" {% endif %}><a href="{{ request.path }}?page={{ page }}">{{ page | add:"1" }}</a></li>
+                    {% endfor %}
+                    <li>
+                    <a href="{{ request.path }}?page={{ pages_count | add:"-1" }}" aria-label="bottom">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

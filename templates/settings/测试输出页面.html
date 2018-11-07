@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>当前事件</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                {% include "settings/base-设置导航栏.html" %}
+            </div>
+            <div class="col-xs-9">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h1>{{ processor.title }}</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ request.path }}" method="post">
+                {% for item in processor.items_list %}
+                    <div class="row">
+                        {{ item | safe }}
+                    <hr>
+                    </div>
+                {% endfor %}
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

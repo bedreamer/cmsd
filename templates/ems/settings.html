@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "ems/base-选项卡.html" %}
+        <h4>&nbsp;</h4>
+
+        {% if message == 'fail' %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>失败!</strong> 参数保存失败！
+        </div>
+        {% elif message == 'success' %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>成功!</strong> 参数保存成功！
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% if request.user.is_superuser %}<form class="form-horizontal" method="post" action="/ems/settings/save/">{% endif %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-offset-1 col-sm-10 text-primary text-center">
+                                    电池SOC基本安全区:
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">下限值</span>
+                                        <input type="number" name="电池SOC基本安全区下限值MinSafe" value="{{ ems.电池SOC基本安全区下限值MinSafe }}" min="0" max="100" class="form-control text-center" placeholder="MinSafe SOC">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">上限值</span>
+                                        <input type="number" name="电池SOC基本安全区上限值MaxSafe" value="{{ ems.电池SOC基本安全区上限值MaxSafe }}" min="0" max="100" class="form-control text-center" placeholder="MaxSafe SOC">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-offset-1 col-sm-10 text-success text-center">
+                                    电池SOC绝对安全区:
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">下限值</span>
+                                        <input type="number" name="电池SOC绝对安全区下限值MinSafest" value="{{ ems.电池SOC绝对安全区下限值MinSafest }}" min="0" max="100" class="form-control text-center" placeholder="MinSafest SOC">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">上限值</span>
+                                        <input type="number" name="电池SOC绝对安全区上限值MaxSafest" value="{{ ems.电池SOC绝对安全区上限值MaxSafest }}" min="0" max="100" class="form-control text-center" placeholder="MaxSafest SOC">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>售电经济利益化标识标志</span><small>(用,分隔)</small>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">时长序列 <small>(小时)</small></span>
+                                        <input type="text" name="售电经济利益化标识标志时长" value="{{ ems.售电经济利益化标识标志时长 }}" class="form-control text-right" placeholder="总和等于24.0, eg, [8.0, 4.0, 5.0, 4.0, 3.0]">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">电价序列 <small>(元/度)</small></span>
+                                        <input type="text" name="售电经济利益化标识标志价格" value="{{ ems.售电经济利益化标识标志价格 }}" class="form-control text-right" placeholder="eg. [0.309, 1.01, 0.6118, 1.0197, 0.618]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">PCS放电允许的价格下限值</span>
+                                <input type="text" name="PCS放电允许下限值" value="{{ ems.PCS放电允许下限值 }}" class="form-control text-right" placeholder="eg, 0.6118">
+                                <span class="input-group-addon">元/度</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            PCS<span class="text-danger">充</span>电参数<small>(用,分隔)</small>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">功率选项序列</span>
+                                        <input type="text" name="Pcs充电功率选项" value="{{ ems.Pcs充电功率选项 }}" class="form-control text-right" placeholder="eg. [0.18, 0.12, 0.06, 0.0]">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">经济系数序列</span>
+                                        <input type="text" name="Pcs充电功率经济系数" value="{{ ems.Pcs充电功率经济系数 }}" class="form-control text-right" placeholder="eg. [1.3, 1.2, 1.1, 0.0]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            PCS<span class="text-primary">放</span>电参数<small>(用,分隔)</small>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">功率选项序列</span>
+                                        <input type="text" name="Pcs放电功率选项" value="{{ ems.Pcs放电功率选项 }}" class="form-control text-right" placeholder="eg. [0.18, 0.12, 0.06, 0.0]">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">经济系数序列</span>
+                                        <input type="text" name="Pcs放电功率经济系数" value="{{ ems.Pcs放电功率经济系数 }}" class="form-control text-right" placeholder="eg. [1.3, 1.2, 1.1, 0.0]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">PCS<span class="text-warning">充放</span>电<small>上限值</small></span>
+                                        <input type="text" name="Pcs充放电上限值" value="{{ ems.Pcs充放电上限值 }}" class="form-control text-right" placeholder="eg. [800, 700]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            PCS<span class="text-danger">充</span>电计划<small>(用,分隔)</small>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">起始序列</span>
+                                        <input type="text" name="Pcs充电计划起始序列" value="{{ ems.Pcs充电计划起始序列 }}" class="form-control text-right" placeholder="eg. [21.0]">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">终止序列</span>
+                                        <input type="text" name="Pcs充电计划终止序列" value="{{ ems.Pcs充电计划终止序列 }}" class="form-control text-right" placeholder="eg. [8.0]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            PCS<span class="text-primary">放</span>电计划<small>(用,分隔)</small>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">起始序列</span>
+                                        <input type="text" name="Pcs放电计划起始序列" value="{{ ems.Pcs放电计划起始序列 }}" class="form-control text-right" placeholder="eg. [9.0]">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">终止序列</span>
+                                        <input type="text" name="Pcs放电计划终止序列" value="{{ ems.Pcs放电计划终止序列 }}" class="form-control text-right" placeholder="eg. [15]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                {% if request.user.is_superuser %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <button type="submit" class="btn btn-primary btn-block">保存</button>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-4">
+        共 <kdb>{{ records_count }}</kdb>条记录,
+        共 <kdb>{{ pages_count }}</kdb>页，当前第 {{ show_page | add:"1" }} 页.
+    </div>
+    <div class="col-sm-8 text-right">
+        {% if request.path == '/history/errors/all/' %}
+            <a class="btn btn-xs btn-danger disabled" href="/history/errors/all/delete/">
+                <span class="glyphicon glyphicon-remove">全部删除</span></a>
+            <span>|</span>
+        {% elif request.path == '/history/events/all/' %}
+            <a class="btn btn-xs btn-danger disabled"href="/history/events/all/delete/">
+                <span class="glyphicon glyphicon-remove">全部删除</span></a>
+            <span>|</span>
+        {% elif request.path == '/history/all/' %}
+            <a class="btn btn-xs btn-danger disabled" href="/history/all/delete/">
+            <span class="glyphicon glyphicon-remove">全部删除</span></a>
+            <span>|</span>
+        {% endif %}
+
+        <a class="btn btn-xs {% if request.path == '/history/all/' %}btn-success{% else %}btn-default{% endif %}"
+           href="/history/all/">全部记录</a>
+
+        <span>|</span>
+
+        <a class="btn btn-xs {% if request.path == '/history/current/all/' %}btn-primary{% else %}btn-default{% endif %}"
+           href="/history/current/all/">当前故障</a>
+
+        <a class="btn btn-xs {% if request.path == '/history/errors/all/' %}btn-primary{% else %}btn-default{% endif %}"
+           href="/history/errors/all/">历史故障</a>
+
+        <span>|</span>
+
+        <a class="btn btn-xs {% if request.path == '/history/events/all/' %}btn-primary{% else %}btn-default{% endif %}"
+           href="/history/events/all/">历史事件</a>
+
+        <a class="btn btn-xs {% if request.path == '/history/events/yaotiao/all/' %}btn-primary{% else %}btn-default{% endif %}"
+           href="/history/events/yaotiao/all/">遥调事件</a>
+
+        <a class="btn btn-xs {% if request.path == '/history/events/yaokong/all/' %}btn-primary{% else %}btn-default{% endif %}"
+           href="/history/events/yaokong/all/">遥控事件</a>
+    </div>
+</div>

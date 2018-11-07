@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>首页</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+        <table class="table table-bordered">
+            <caption>系统运行报表</caption>
+            <tr>
+                <th>系统累计运行时长</th>
+                <td>{{ rolling_days }}天</td>
+                <th>系统已经启动时长</th>
+                <td>{{ running_days }}</td>
+                <th>当前登录用户</th>
+                <td>{{ request.user }}</td>
+                <th>启动时间</th>
+                <td>{{ startup_tsp }}</td>
+            </tr>
+            <tr>
+                <th>系统历史告警总数</th>
+                <td>{{ errors_total_count }} 条</td>
+                <th>系统当前告警总数</th>
+                <td>{{ current_warnings_count }} 条</td>
+            </tr>
+        </table>
+
+        <h5>U盘插入位置指导</h5>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/static/img/exportguide/1.png">
+                    <div class="caption">
+                        <h3>图1</h3>
+                        <p>需要找到的设备正面</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/static/img/exportguide/2.png">
+                    <div class="caption">
+                        <h3>图2</h3>
+                        <p>需要找到的设备背面</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/static/img/exportguide/3.png">
+                    <div class="caption">
+                        <h3>图3</h3>
+                        <p>红色圈内的三个口即为USB接口位置</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>U盘插入位置指导</h5>
+                <hr>
+                <p><kbd>*</kbd> 当检测到插入U盘后，下面的`导出按钮将会可操作.`</p>
+                <p><kbd>*</kbd> 导出的文件名格式为: 'YYYY-mm-DD-系统报告.xls', U盘中原有同名文件将会被替换.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-4">
+                <a class="btn btn-success btn-block disabled"><span class="glyphicon glyphicon-export">导出</span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

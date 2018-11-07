@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Title</title>
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/draw.1.1.js" ></script>
+</head>
+<body>
+    <button id="link">连接线</button>
+    <button id="lable">标签</button>
+    <button id="yc">遥测</button>
+    <button id="yx">遥信</button>
+    <button id="icon">图标</button>
+    <button id="save">保存</button>
+    <button id="restore">还原</button>
+    <lable>线宽
+        <select id="id_line_width" style="height: 25px;">
+            <option value=1>1px</option>
+            <option value=2>2px</option>
+            <option value=3>3px</option>
+            <option value=4>4px</option>
+            <option selected=true value=5>5px</option>
+            <option value=8>8px</option>
+            <option value=10>10px</option>
+        </select>
+    </lable>
+    <lable>填充色<input id="id_color" type="color" /></lable>
+
+    <select id="id_font_size" style="height: 25px;">
+        <option style="font-size: 5px;" value=5>Seir Font 5px</option>
+        <option style="font-size: 8px;" value=8>Seir Font 8px</option>
+        <option style="font-size: 10px;" value=10>Seir Font 10px</option>
+        <option style="font-size: 13px;" value=13>Seir Font 13px</option>
+        <option selected=true style="font-size: 15px;" value=15>Seir Font 15px</option>
+        <option style="font-size: 17px;" value=17>Seir Font 17px</option>
+        <option style="font-size: 20px;" value=20>Seir Font 20px</option>
+        <option style="font-size: 25px;" value=25>Seir Font 25px</option>
+        <option style="font-size: 30px;" value=30>Seir Font 30px</option>
+    </select>
+    <lable>字体颜色<input id="id_font_color" value="#0f52f6" type="color" /></lable>
+    <hr>
+    <label>layer:<a id="id_layer">(0, 0)</a></label>
+    <hr>
+    <canvas id="c" style="border-width: 1px; border-style: solid"></canvas>
+    <div id="id_float"></div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建数据采集器</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+
+    <script>
+        $(document).ready(function () {
+            $("select[name=type] option[value={{ collector.type }}]").attr("selected", true);
+            $("select[name=operator] option[value={{ collector.operator }}]").attr("selected", true);
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/collector/"><span class="glyphicon glyphicon-share-alt"></span> 取消新增</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="center-block">
+            <form method="post" action="{{ action }}">
+                {% csrf_token %}
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="sizing-addon2">采集器名称</span>
+                <input type="text" class="form-control" name="name" value="{{ collector.name }}">
+            </div>
+
+              <div class="form-group input-group">
+                <span class="input-group-addon" id="sizing-addon2">主机地址</span>
+                <input type="text" class="form-control" id="id_title" name="host" value="{{ collector.host }}">
+              </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group input-group">
+                    <span class="input-group-addon">数据采集周期</span>
+                    <input type="number" class="form-control" min="10" max="86400" name="period" value="{{ collector.period }}">
+                    <span class="input-group-addon">秒</span>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <p class="help-block">范围(10 < 周期 < 86400), 数据采集周期和数据存储周期相同。</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group input-group">
+                    <span class="input-group-addon" id="sizing-addon2">数据储存容量</span>
+                    <input type="number" class="form-control" id="id_title" name="maxcount" value="{{ collector.maxcount }}">
+                    <span class="input-group-addon" id="sizing-addon2">条</span>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <p class="help-block">&lt;=0 不限制容量， 另外如果不需要记录数据库，则最大值为1</p>
+                </div>
+            </div>
+
+              <div class="form-group hide">
+                <label for="pageTitle">数据采集协议</label>
+                  <select style="height: 30px;" class="selectpicker" name="protocol">
+                      <option selected=true value="http://">HTTP</option>
+                      <option value="https://">HTTPS</option>
+                  </select>
+              </div>
+
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="pageTitle">采集器类型</label>
+                          <select id="id_select_type" style="height: 30px;" class="selectpicker" name="type">
+                              <option value="single-yaoce">单点-实时遥测</option>
+                              <option value="single-yaoxin">单点-实时遥信</option>
+                              <option value="multi-yaoce">多点-实时遥测</option>
+                              <option value="multi-yaoxin">多点-实时遥信</option>
+                          </select>
+                          <p class="help-block">选择单点数据后，数据处理方式默认采用`保持原始数据`。</p>
+                      </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <div class="form-group hide">
+                        <label for="pageTitle">数据处理方式</label>
+                          <select id="id_data_operate" style="height: 30px;" class="selectpicker" name="operator">
+                              <option value="operate-origin">保持原始数据</option>
+                              <option value="operate-sum">数据求和(+)</option>
+                              <option value="operate-sub">数据求差(-)</option>
+                              <option value="operate-mul">数据求乘积(x)</option>
+                              <option value="operate-div">数据求商(÷)</option>
+                              <option value="operate-mod">数据求模(%)</option>
+                              <option value="operate-or">数据按位或(|)</option>
+                              <option value="operate-and">数据按位与(&)</option>
+                              <option value="operate-xor">数据按位异或(^)</option>
+                              <option value="operate-max">数据求最大值(max)</option>
+                              <option value="operate-min">数据求最小值(min)</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group input-group">
+                <label for="pageTitle">是否需要记录历史数据库</label>
+                {% if collector.record %}
+                <input type="radio" value="on" name="record" checked=true> 需要
+                <input type="radio" value="off" name="record"> 不需要
+                {% else %}
+                <input type="radio" value="on" name="record"> 需要
+                <input type="radio" value="off" name="record" checked=true> 不需要
+                {% endif %}
+                  <p class="help-block">原有采集器需要历史数据，更改为不需要历史数据后，已经存储的历史数据将被清除！！</p>
+              </div>
+
+              <div class="form-group">
+                  <label for="pageTitle">api路径<small>(每行一条)</small></label>
+                <textarea class="form-control" name="apipaths" rows="4">{{ collector.apipaths }}</textarea>
+                  <pre class="help-block" style="text-align: left">
+                      支持的格式有：
+                      (1) 实时数据访问单点/数组路径
+                        api:///v1.0/realtime/BMS数据块/0/BMS遥测数据/电池电压
+                        api:///v1.0/realtime/BMS数据块/0/BMS遥测数据/单体电池电压
+                        api:///v1.0/realtime/BMS数据块/0/BMS遥信/电池过压
+                      (2) 采集器路径, 其中9为采集器ID
+                        collector://9
+                      (3) 立即数
+                        real://100
+                        real://0xffffffff
+                  </pre>
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">停止采集数据</label>
+                  {% if collector.disabled %}
+                  <input type="radio" value="on" name="disabled"> 采集
+                  <input type="radio" value="off" name="disabled" checked=true> 不采集
+                  {% else %}
+                  <input type="radio" value="on" name="disabled" checked=true> 采集
+                  <input type="radio" value="off" name="disabled"> 不采集
+                  {% endif %}
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">{{ submit }}</button>
+            </form>
+        </div>
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

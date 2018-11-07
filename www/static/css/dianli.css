@@ -1,0 +1,139 @@
+
+.dianli {
+    position: absolute;
+    float: left;
+    color: #009FE8;
+}
+
+/*水平线*/
+.wire-H {
+    height: 10px;
+    background-color: #ac2925;
+}
+
+/*垂直线*/
+.wire-V {
+    width: 10px;
+    background-color: #39ac25;
+}
+
+.img-selector {
+    position: absolute;
+    top: 0px;
+    left:
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #0f0f0f;
+}
+
+.dianli-img-1 {
+    background-image: url("/static/imgs/dl/1.png");
+    background-size:100% 100%;
+}
+.dianli-img-2 {
+    background-image: url("/static/imgs/dl/2.png");
+    background-size:100% 100%;
+}
+.dianli-img-3 {
+    background-image: url("/static/imgs/dl/3.png");
+    background-size:100% 100%;
+}
+.dianli-img-4 {
+    background-image: url("/static/imgs/dl/4.png");
+    background-size:100% 100%;
+}
+.dianli-img-5 {
+    background-image: url("/static/imgs/dl/5.png");
+    background-size:100% 100%;
+}
+.dianli-img-6 {
+    background-image: url("/static/imgs/dl/6.png");
+    background-size:100% 100%;
+}
+.dianli-img-7 {
+    background-image: url("/static/imgs/dl/7.png");
+    background-size:100% 100%;
+}
+.dianli-img-8 {
+    background-image: url("/static/imgs/dl/8.png");
+    background-size:100% 100%;
+}
+.dianli-img-9 {
+    background-image: url("/static/imgs/dl/9.png");
+    background-size:100% 100%;
+}
+.dianli-img-10 {
+    background-image: url("/static/imgs/dl/10.png");
+    background-size:100% 100%;
+}
+.dianli-img-11 {
+    background-image: url("/static/imgs/dl/11.png");
+    background-size:100% 100%;
+}
+.dianli-img-12 {
+    background-image: url("/static/imgs/dl/12.png");
+    background-size:100% 100%;
+}
+.dianli-img-13 {
+    background-image: url("/static/imgs/dl/13.png");
+    background-size:100% 100%;
+}
+.dianli-img-14 {
+    background-image: url("/static/imgs/dl/14.png");
+    background-size:100% 100%;
+}
+.dianli-img-15 {
+    background-image: url("/static/imgs/dl/15.png");
+    background-size:100% 100%;
+}
+.dianli-img-16 {
+    background-image: url("/static/imgs/dl/16.png");
+    background-size:100% 100%;
+}
+.dianli-img-17 {
+    background-image: url("/static/imgs/dl/17.png");
+    background-size:100% 100%;
+}
+.dianli-img-18 {
+    background-image: url("/static/imgs/dl/18.png");
+    background-size:100% 100%;
+}
+
+
+.tag-selector {
+    position: relative;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #0f0f0f;
+}
+
+.tag-lable {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.tag-yc-value {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.tag-yx-value-0 {
+    background-color: #3e8f3e;
+}
+
+.tag-yx-value-1 {
+    background-color: #ac2925;
+}
+
+
+
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>数据服务错误</title>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">从数据总线上读取配置数据块失败</h3>
+            </div>
+            <div class="panel-body">
+                <h1>错误代码: <span class="text-danger">{{ code }}</span></h1>
+                <hr>
+                <small>请依照如下顺序进行检查：</small>
+                <h3>1. 检查您的登录名是否具有操作该参数的权限？</h3>
+                <h3>2. 数据总线程序是否已经启动？</h3>
+                <h3>3. 配置数据服务程序是否已经启动？ </h3>
+                <h3>4. 检查设备存储空间是否已满？ </h3>
+                <h3>5. 联系管理员解决此问题。</h3>
+
+                <div class="row">
+                    <div class="col-xs-offset-11 col-xs-1">
+                        <a class="btn btn-primary" href="{{ next }}">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

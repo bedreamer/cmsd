@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+    {% include "settings/base-设置导航栏v2.0.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-9">
+                <form class="form-horizontal" method="post" action="{{ request.path }}">
+                    <table class="table table-condensed">
+                    <caption><h3><span class="glyphicon glyphicon-wrench"></span>光伏逆变器参数配置</h3></caption>
+                    <tr>
+                        <th>#</th>
+                        <th>光伏逆变器型号</th>
+                        <th>通讯地址</th>
+                    </tr>
+                    {% for item in configure %}
+                        <tr>
+                            <th>
+                                <kbd style="font-size: 20px;">{{ forloop.counter }}#光伏逆变器</kbd>
+                            </th>
+                            <td>
+                                <select style="width: 100%; height: 30px;" name="光伏逆变器类型[]">
+                                    {% for option in supported %}
+                                    <option value="{{ option.value }}"{% if item.光伏逆变器类型 == option.value %} selected{% endif %}>{{ option.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="光伏逆变器通讯地址[]" value="{{ item.光伏逆变器通讯地址 }}" />
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                    <input type="submit" id="commit-button" value="提交" class="hide">
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

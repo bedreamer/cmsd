@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+    {% include "settings/base-设置导航栏v2.0.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-9">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h1><span class="glyphicon glyphicon-wrench"></span> 系统参数配置 </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning" role="alert">
+                            <span class="glyphicon glyphicon-warning-sign"></span>
+                            系统参数关系到监控系统的运行稳定及可靠新，请具有专业技能的操作员或在专业技术指导下进行修改！。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-9">
+                <div class="jumbotron">
+                    {% if configure_count %}
+                    <p>这是你第<strong>0{{ configure_count }}</strong>次配置系统参数.</p>
+                    {% else %}
+                    <p>你还没有配置过系统参数。</p>
+                        <h1>&nbsp;</h1>
+                    <strong>建议你先将当前系统参数进行备份。</strong>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    <div class="container">
+        <h1>&nbsp;</h1>
+        <h1>&nbsp;</h1>
+        <h1>&nbsp;</h1>
+        <h1>&nbsp;</h1>
+        <h1>&nbsp;</h1>
+
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <a href="/admin/logout/?next={{ cancel }}">
+                    <span class="glyphicon glyphicon-log-out text-success" style="font-size: 100px"></span>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/admin/logout/?next={{ cancel }}">
+                    <span class="glyphicon glyphicon-user text-info" style="font-size: 100px"></span>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/admin/logout/?next={{ cancel }}">
+                    <span class="glyphicon glyphicon-repeat text-danger" style="font-size: 100px"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <b>退出登录</b>
+            </div>
+            <div class="col-sm-4 text-center">
+                <b>切换用户</b>
+            </div>
+            <div class="col-sm-4 text-center">
+                <b>重新启动</b><small>(需要鉴权)</small>
+            </div>
+        </div>
+
+        <h1>&nbsp;</h1>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-primary" href="{{ cancel }}">取消</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

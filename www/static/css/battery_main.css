@@ -1,0 +1,163 @@
+.frame-title-arear {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    font-size: 30px;
+}
+
+.title-arear-item {
+    margin-top: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.title-arear-item .name {
+    text-indent: 1em;
+    font-size: 20px;
+    font-weight: bold;
+    width: 60%;
+    position: relative;
+    float: left;
+    //background-color: #3610f0;
+}
+
+.title-arear-item .value {
+    font-size: 20px;
+    font-style: italic;
+    width: 25%;
+    position: relative;
+    float: left;
+    //background-color: #0af05b;
+    text-align: right;
+}
+
+.title-arear-item .unit {
+    font-size: 20px;
+    width: 15%;
+    position: relative;
+    float: left;
+    //background-color: #f07f04;
+    text-indent: 0.8em;
+}
+
+
+.frame-button-bar-arear {
+    //border-bottom-style: solid;
+    //border-bottom-width: 1px;
+    font-size: 30px;
+    padding-bottom: 8px;
+}
+
+.frame-substract-arear {
+}
+
+.frame-grid-1-arear {
+    height: 300px;
+    margin-top: 20px;
+    //background-color: #777777;
+    border: 1px solid #f0f0f0;
+    -webkit-transfrom:translateZ(0);
+}
+
+.frame-grid-2-arear {
+    height: 300px;
+    margin-top: 20px;
+    background-color: #777777;
+    border: 1px solid #f0f0f0;
+}
+
+.frame-yaoce-arear {
+    padding-top: 50px;
+    padding-bottom: 15px;
+    font-style: italic;
+}
+
+.frame-yaoce-arear .yaoce-arear-title {
+    font-style: normal;
+    font-size: 20px;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.yaoce-arear-item {
+    position: relative;
+    font-size: 12px;
+    float: left;
+    width: 19%;
+    padding: 0px 10px 10px 0px;
+    padding-left: 1em;
+    border-bottom: 1px dot-dot-dash #f0f0f0;
+    //background-color: #f0385a;
+    margin-right: 5px;
+    border-width: 1px;
+    border-style: none;
+}
+
+.yaoce-arear-item .name {
+    position: relative;
+    text-indent: 1em;
+    //background-color: #009FE8;
+}
+
+.yaoce-arear-item .value {
+    text-indent: 10em;
+}
+
+.yaoce-arear-item .unit {
+    float: right;
+    text-indent: 1em;
+}
+
+
+.frame-yaoxin-arear {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-style: italic;
+}
+
+.frame-yaoxin-arear .yaoxin-arear-title {
+    font-style: normal;
+    font-size: 20px;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.yaoxin-arear-item {
+    position: relative;
+    float: left;
+    font-size: 12px;
+    width: 19%;
+    padding: 0px 10px 10px 0px;
+    padding-left: 1em;
+    border-bottom: 1px dot-dot-dash #f0f0f0;
+    //background-color: #f0f0f0;
+    margin-right: 5px;
+}
+
+.yaoxin-arear-item .name {
+    float: left;
+    position: relative;
+    text-indent: 1em;
+    //background-color: #0f0f0f;
+    width: 90%;
+}
+
+.yaoxin-arear-item .value {
+    float: left;
+    position: relative;
+    width: 10%;
+    max-width: 20px;
+    height: 20px;
+    background-color: #777777;
+}
+
+.yaoxin-arear-item .value-1 {
+    background-color: #FF0000;
+}
+
+.yaoxin-arear-item .value-0 {
+    background-color: #00ff00;
+}

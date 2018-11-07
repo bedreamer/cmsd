@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>单体电压</title>
+    <meta http-equiv="refresh" content="{{ period }}">
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                {% include "bms/base-组tab列表模板.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped table-hover table-bordered text-center table-responsive">
+                    <caption>
+                        <div class="row">
+                            <div class="col-sm-6">
+                            单体<strong>电压</strong>信息，共计电池 <strong> {{ battery_count }}</strong> 节, 单位: V.
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                数据将会自动更新，周期约 <kbd>{{ period }}</kbd> 秒.
+                            </div>
+                        </div>
+                    </caption>
+                    <tr>{% for th in title_row %}<th>{{ th }}</th>{% endfor %}</tr>
+                    {% for row in data_rows %}
+                        <tr>
+                             <th>{% widthratio forloop.counter0 1 column_count %}</th>{% for td in row %}<td>{{ td }}</td>{% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

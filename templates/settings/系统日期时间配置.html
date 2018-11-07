@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+    <script>
+        $(document).ready(function () {
+            function update_datetimefunction () {
+                var map = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09'];
+                var d = new Date();
+                var month = d.getMonth();
+                month = month + 1 >= 10 ? month + 1 : map[ month + 1];
+                var day = d.getDate();
+                day = day >= 10 ? day: map[ day];
+                var hour = d.getHours();
+                hour = hour >= 10 ? hour: map[ hour ];
+                var minu = d.getMinutes();
+                minu = minu >= 10 ? minu: map[ minu ];
+                var sec = d.getSeconds();
+                sec = sec >= 10 ? sec: map[ sec ];
+
+                var date = [d.getFullYear(), month, day].join("/");
+                var time = [hour, minu, sec].join(":");
+
+                $("#id_now").html(date + ' ' + time);
+            }
+            setInterval(update_datetimefunction, 1000);
+            update_datetimefunction();
+        });
+    </script>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                {% include "settings/base-设置导航栏.html" %}
+            </div>
+            <div class="col-xs-9">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h1><span class="glyphicon glyphicon-wrench"></span> 日期时间设置</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form method="post" action="/settings/datetime/">
+                            <table class="table">
+                                <caption>系统日期时间设置</caption>
+                                <tr>
+                                    <th>当前时钟</th>
+                                    <td>
+                                        <span id="id_now" class="text-center" style="color: #2eaaff; font-size: 20px; font-weight: bold;"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>系统日期</th>
+                                    <td><input type="date" name="date" class="form-control text-center" value="{% now "Y-m-d" %}"></td>
+                                    <th>系统时间</th>
+                                    <td><input type="text" name="time" class="form-control text-center" value="{% now "H:i:s" %}"></td>
+                                </tr>
+                            </table>
+                            <input type="submit" value="保存" class="btn btn-default"></input>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

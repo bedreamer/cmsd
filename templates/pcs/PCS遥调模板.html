@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+    <style>
+        .shit_nav {
+            padding-left: 0;
+            margin-left: 0;
+            height: 100%;
+            background-color: #f8f8f8;
+            border-color: #e7e7e7;
+            position: absolute;
+            left: 0px;
+            top: 50px;
+            width: 100%;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "pcs/base-tab列表模板.html" %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                    {% if request.user.is_superuser %}<form method="post" action="/pcs/{{ pcs_id }}/yaotiao/">{% endif %}
+                        <table class="table table-bordered table-condensed table-striped">
+                        <caption>
+                            <div class="row">
+                                <div class="col-sm-4">PCS遥调参数</div>
+                                {% if request.method == "POST" %}
+                                <div class="col-sm-6">
+                                    {% if success %}
+                                        <span class="text-success">写入参数成功！</span>
+                                    {% else %}
+                                        <span class="text-danger">写入参数失败!</span>
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-2 text-center">
+                                {% else %}
+                                <div class="col-sm-offset-6 col-sm-2 text-center">
+                                {% endif %}
+                                    {% if request.user.is_superuser %}<button type="submit" class="btn btn-sm btn-primary" value="submit">保存修改</button>{% endif %}
+                                </div>
+                            </div>
+                        </caption>
+                        {% for row in yaotiao_list %}
+                            <tr>
+                            {% for name, value, unit in row %}
+                                {% if name != "系统时钟" %}
+                                <td>{{ name }}</td>
+                                <td>
+                                    {% if not request.user.is_superuser %}
+                                        <span>{{ value }}</span>
+                                    {% else %}
+                                    <div class="input-group">
+                                        <input class="text-right" type="number" name="{{ name }}" style="width: 80px; height: 18px;" value="{{ value }}">
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td><span>{{ unit }}</span></td>
+                                {% else %}
+                                <td colspan="3">
+                                    <div class="row">
+                                        <div class="col-sm-6">{{ name }}</div>
+                                        <div class="col-sm-6">
+                                            <input class="text-right" {% if not request.user.is_superuser %}disabled{% endif %} type="text" name="{{ name }}" style="width: 140px; height: 18px;" value="{{ value }}">
+                                        </div>
+                                    </div>
+                                </td>
+                                        {% endif %}
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% if request.user.is_superuser %}</form>{% endif %}
+                    &nbsp;</div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

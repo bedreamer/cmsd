@@ -1,0 +1,185 @@
+{% load userfileter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+    <meta http-equiv="refresh" content="10">
+    <style>
+        .shit_nav {
+            padding-left: 0;
+            margin-left: 0;
+            height: 2%;
+            background-color: #f8f8f8;
+            border-color: #e7e7e7;
+            position: absolute;
+            left: 0px;
+            top: 50px;
+            width: 2%;
+            border-radius: 0px;
+        }
+
+        .line-A {
+            color: #f0f0f0;
+            background: #eb9316;
+            border-radius: 4px;
+        }
+        .line-B {
+            color: #f0f0f0;
+            background: #1aeb22;
+            border-radius: 4px;
+        }
+
+        .line-C {
+            color: #f0f0f0;
+            background: #eb3a0d;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "pcs/base-tab列表模板.html" %}
+                    </div>
+                </div>
+
+                <table class="table table-striped table-bordered">
+                    <caption>实时数据</caption>
+                    <tr  style="font-size: 20px;">
+                        <td>电网频率</td>
+                        <th>{{ pcs.电网频率|zoom:2 }} HZ</th>
+                        <td>机内温度</td>
+                        <th>{{ pcs.机内温度|zoom:2 }} ℃</th>
+                        <th>充放电状态</th>
+                        {% if pcs.充放电状态 == 1 %}
+                        <th colspan="3" class="danger">正在充电</th>
+                        {% elif pcs.充放电状态 == 2 %}
+                        <th colspan="3" class="success">正在放电</th>
+                        {% else %}
+                        <th colspan="3" class="info">待机</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>AB线电压</td>
+                        <th>{{ pcs.AB线电压|zoom:2 }} V</th>
+                        <td><span class="line-A">&nbsp;A&nbsp;</span> 相电流</td>
+                        <th>{{ pcs.A相电流|zoom:2 }} A</th>
+                        <td>直流电压</td>
+                        <th>{{ pcs.直流电压|zoom:2 }} V</th>
+                        <td>视在功率</td>
+                        <th>{{ pcs.视在功率|zoom:5 }} kVA</th>
+                    </tr>
+                    <tr>
+                        <td>BC线电压</td>
+                        <th>{{ pcs.BC线电压|zoom:2 }} V</th>
+                        <td><span class="line-B">&nbsp;B&nbsp;</span> 相电流</td>
+                        <th>{{ pcs.B相电流|zoom:2 }} A</th>
+                        <td>直流电流</td>
+                        <th>{{ pcs.直流电流|zoom:2 }} A</th>
+                        <td>有功功率</td>
+                        <th>{{ pcs.有功功率|zoom:5 }} kW</th>
+                    </tr>
+                    <tr>
+                        <td>CA线电压</td>
+                        <th>{{ pcs.CA线电压|zoom:2 }} V</th>
+                        <td><span class="line-C">&nbsp;C&nbsp;</span> 相电流</td>
+                        <th>{{ pcs.C相电流|zoom:2 }} A</th>
+                        <td>直流功率</td>
+                        <th>{{ pcs.直流功率|zoom:5 }} KW</th>
+                        <td>无功功率</td>
+                        <th>{{ pcs.无功功率|zoom:5 }} kVar</th>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered">
+                    <caption>设备信息</caption>
+                    <tr class="table-bordered">
+                        <td>A1/B1/C1 模块温度</td>
+                        <td>{{ pcs.模块A1温度|zoom:2 }}/{{ pcs.模块B1温度|zoom:2 }}/{{ pcs.模块C1温度|zoom:2 }} ℃</td>
+                        <td>A2/B2/C2 模块温度</td>
+                        <td>{{ pcs.模块A2温度|zoom:2 }}/{{ pcs.模块B2温度|zoom:2 }}/{{ pcs.模块C2温度|zoom:2 }} ℃</td>
+                        <td></td>
+                        <td>工作效率</td>
+                        <td>{{ pcs.工作效率|zoom:2 }} %</td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered">
+                    <caption>短期统计信息</caption>
+                    <tr>
+                        <td>日充电时间</td>
+                        <td>{{ pcs.日充电时间|zoom:2 }} min</td>
+                        <td>月充电时间</td>
+                        <td>{{ pcs.月充电时间|zoom:2 }} H</td>
+                    </tr>
+                    <tr>
+                        <td>日放电时间</td>
+                        <td>{{ pcs.日放电时间|zoom:2 }} min</td>
+                        <td>月放电时间</td>
+                        <td>{{ pcs.月放电时间|zoom:2 }} H</td>
+                    </tr>
+                    <tr>
+                        <td>日充电量</td>
+                        <td>{{ pcs.日充电量|zoom:2 }} kWh</td>
+                        <td>月充电量</td>
+                        <td>{{ pcs.月充电量|zoom:2 }} kWh</td>
+                    </tr>
+                    <tr>
+                        <td>日放电量</td>
+                        <td>{{ pcs.日放电量|zoom:2 }} kWh</td>
+                        <td>月放电量</td>
+                        <td>{{ pcs.月放电量|zoom:2 }} kWh</td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered">
+                    <caption>长期统计信息</caption>
+                    <tr>
+                        <td>年充电时间</td>
+                        <td>{{ pcs.年充电时间|zoom:2 }} H</td>
+                        <td>总充电时间</td>
+                        <td>{{ pcs.总充电时间|zoom:2 }} H</td>
+                        <td>充电次数</td>
+                        <td>/</td>
+                    </tr>
+                    <tr>
+                        <td>年放电时间</td>
+                        <td>{{ pcs.年放电时间|zoom:2 }} H</td>
+                        <td>总放电时间</td>
+                        <td>{{ pcs.总放电时间|zoom:2 }} H</td>
+                        <td>放电次数</td>
+                        <td>/</td>
+                    </tr>
+                    <tr>
+                        <td>年充电量</td>
+                        <td>{{ pcs.年充电量|zoom:2 }} kWh</td>
+                        <td>总充电量</td>
+                        <td>{{ pcs.总充电量|zoom:2 }} kWh</td>
+                        <td>总运行时间</td>
+                        <td>{{ pcs.总运行时间|zoom:2 }} h</td>
+                    </tr>
+                    <tr>
+                        <td>年放电量</td>
+                        <td>{{ pcs.年放电量|zoom:2 }} kWh</td>
+                        <td>总放电量</td>
+                        <td>{{ pcs.总放电量|zoom:2 }} kWh</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

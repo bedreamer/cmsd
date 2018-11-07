@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史事件-文档</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_anonymous %}
+                <li><a href="/admin/login/?next=/"><span class="glyphicon glyphicon-user"></span> 登录 </a></li>
+                {% else %}
+                <li><a href="/"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/settings/"><span class="glyphicon glyphicon-wrench"></span> 设置</a></li>
+                <li><a href="/admin/logout/?next=/"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="page-header">
+            <h1>历史事件文档 <small>详细构成及存取说明</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">存储结构</div>
+<pre>
+    # 历史事件记录
+    class HistoryRecord(models.Model):
+        # system, user, bms, pcs, pv, bg 等等，根据实际需求自主定义
+        kind = models.CharField(default="system", max_length=60, help_text="类型名称")
+        code = models.IntegerField(default=0, blank=True, null=True, help_text="事件代码")
+        datetiem = models.DateTimeField(default="2018-01-01 00:00:00.000", help_text="事件产生时戳")
+        master = models.IntegerField(default=0, blank=True, null=True, help_text="设备主索引号")
+        slave = models.IntegerField(default=0, blank=True, null=True, help_text="设备次索引号")
+        body = models.TextField(default="无", help_text="事件内容")
+</pre>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped table-bordered">
+                    <caption>关于kind的举例</caption>
+                    <tr>
+                        <th>#</th>
+                        <th>值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>system</td>
+                        <td>系统级别的事件, 无法定位具体设备</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>user</td>
+                        <td>用户级别的事件，无法定位具体设备</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

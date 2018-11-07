@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>事件记录</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+        <div class="row">
+            <br>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6 text-right">
+                <a class="btn btn-xs btn-default" href="/history/current/">当前事件</a>
+                <a class="btn btn-xs btn-default" href="/history/">历史事件</a>
+                <a class="btn btn-xs btn-primary" href="#">事件详情</a>
+                <a class="btn btn-xs btn-default" href="#"><span class="glyphicon glyphicon-remove text-danger"></span>删除这条记录</a>
+            </div>
+        </div>
+        <hr>
+        <h3><span class="glyphicon glyphicon-info-sign"></span> 事件 {{ record.ueid }} 详细信息</h3>
+        <table class="table">
+            <tr class="row">
+                <td class="col-sm-1"><kbd>记录ID</kbd></td>
+                <td class="col-sm-11">{{ record.id }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-1"><kbd>事件ID</kbd></td>
+                <td class="col-sm-11">{{ record.ueid }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-1"><kbd>事件级别</kbd></td>
+                <td class="col-sm-1">
+                    {% if record.elevel == 0 %}<a class="btn btn-xs btn-danger">系统级错误</a>
+                    {% elif record.elevel == 1 %}<a class="btn btn-xs btn-warning">故障</a>
+                    {% elif record.elevel == 2 %}<a class="btn btn-xs btn-warning">告警</a>
+                    {% else %}{{ record.elevel }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-1"><kbd>事件代码</kbd></td>
+                <td class="col-sm-11">{{ record.ecode }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-1"><kbd>事件来源</kbd></td>
+                <td class="col-sm-1">{{ record.eclass | safe }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-1 text-justify"><kbd>事件摘要</kbd></td>
+                <td class="col-sm-11">{{ record.abstrct | safe }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>事件详细记录</kbd></td>
+                <td class="col-sm-10">{{ record.econtext | safe }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>事件开始时戳</kbd></td>
+                <td class="col-sm-10">{{ record.etsp_begin| date:"Y-m-d H:i:s" }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>事件结束时戳</kbd></td>
+                <td class="col-sm-10">{{ record.etsp_end| date:"Y-m-d H:i:s" }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>确认人</kbd></td>
+                <td class="col-sm-10">{{ record.econfirm_user | safe }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>确认时间</kbd></td>
+                <td class="col-sm-10">{{ record.econfirm_tsp| date:"Y-m-d H:i:s" }}</td>
+            </tr>
+            <tr class="row">
+                <td class="col-sm-2"><kbd>确认备注</kbd></td>
+                <td class="col-sm-10">{{ record.econfirm_sign }}</td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

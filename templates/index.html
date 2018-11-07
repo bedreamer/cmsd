@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title{{ name }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/settings/"><span class="glyphicon glyphicon-wrench"></span> 设置</a></li>
+                {% if request.user.is_superuser %}
+                    <li><a href="/editor/page/"><span class="glyphicon glyphicon-list"></span>页面编辑列表</a></li>
+                {% endif %}
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            {% for page in pages %}
+                {% if pid == page.id %}
+                    <li class="active"><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% else %}
+                    <li><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if request.user.is_superuser %}
+                <li><a href="/editor/page/new/"><span class="glyphicon glyphicon-plus"></span>添加页面</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </nav>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面管理</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/page/"><span class="glyphicon glyphicon-eye-open"></span> 访问首页</a></li>
+                <li><a href="/editor/page/new/"><span class="glyphicon glyphicon-plus"></span> 新增</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if total > 0 %}
+            <table class="table center">
+            <tr>
+                <th>id</th>
+                <th>标题</th>
+                <th>名称</th>
+                <th>设备索引编号</th>
+                <th>模板文件</th>
+                <th>显示序号</th>
+                <th>显示状态</th>
+                <th>操作</th>
+            </tr>
+            {% for page in pages %}
+                <tr>
+                    <td>{{ page.id }}</td>
+                    <td>{{ page.title }}</td>
+                    <td>{{ page.name }}</td>
+                    <td>{{ page.devicesn }}</td>
+                    <td>{{ page.template }}</td>
+                    <td>
+                        <a href="/editor/page/{{ page.id }}/order/up"><span style="color: #FF0000" class="glyphicon glyphicon-chevron-up"></span></a>&nbsp;
+                        {{ page.display_order }}
+                        <a href="/editor/page/{{ page.id }}/order/down"><span style="color: #00ff00" class="glyphicon glyphicon-chevron-down"></span></a>&nbsp;
+                    </td>
+
+                    {% if page.display %}
+                        <td><a href="/editor/page/{{ page.id }}/display/toggle"><span style="color: #00ff00" class="glyphicon glyphicon-eye-open"></span></a> 显示</td>
+                    {% else %}
+                        <td><a href="/editor/page/{{ page.id }}/display/toggle"><span style="color: #FF0000" class="glyphicon glyphicon-eye-close"></span></a> 隐藏</td>
+                    {% endif %}
+
+                    <td>
+                        <a href="/page/{{ page.id }}/"><span class="glyphicon glyphicon-send"></span></a>&nbsp;
+                        <a href="/editor/page/delete/{{ page.id }}/"><span class="glyphicon glyphicon-remove"></span></a>&nbsp;
+                        <a href="/editor/page/{{ page.id }}/"><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">还没有页面！点击<a href="/editor/page/new/">这里</a>新建一个!</div>
+        {% endif %}
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

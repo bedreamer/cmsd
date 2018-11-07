@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                {% include "settings/base-设置导航栏.html" %}
+            </div>
+            <div class="col-xs-9">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h1><span class="glyphicon glyphicon-wrench"></span> 系统高级选项</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-offset-11 col-xs-1">
+                        <a class="btn btn-primary" href="/settings/refresh/">推送参数</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <form method="post" action="{{ request.path }}">
+                            <div class="input-group">
+                                <lable>数据调试标识 </lable>
+                                <label>
+                                    关闭
+                                    <input type="radio" name="debug" {% if debug == 0 %}checked{% endif %} value="0" />
+                                </label>
+                                <label>
+                                    开启
+                                    <input type="radio" name="debug" {% if debug == 1 %}checked{% endif %} value="1" />
+                                </label>
+                            </div>
+
+                            <div class="input-group">
+                                <lable>蜂鸣器开关 </lable>
+                                <label>
+                                    关闭
+                                    <input type="radio" name="beep" {% if beep == 0 %}checked{% endif %} value="0" />
+                                </label>
+                                <label>
+                                    开启
+                                    <input type="radio" name="beep" {% if beep == 1 %}checked{% endif %} value="1" />
+                                </label>
+                            </div>
+
+
+                            <input type="submit" class="btn btn-primary btn-block" value="保存"></input>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

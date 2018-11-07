@@ -1,0 +1,17 @@
+<div class="row text-right">
+    <div class="col-sm-offset-4 col-sm-8">
+        <nav>
+            <ul class="pagination">
+                <li{% if not request.GET.range %} class="active"{% endif %}>
+                    <a href="{{ request.path }}">实时</a>
+                </li>
+                <li{% if request.GET.range == 'day' %} class="active"{% endif %}>
+                    <a href="{{ request.path }}?range=day">24h统计</a>
+                </li>
+                <li{% if request.GET.range == 'week' %} class="active"{% endif %}>
+                    <a href="{{ request.path }}?range=week">7day统计</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

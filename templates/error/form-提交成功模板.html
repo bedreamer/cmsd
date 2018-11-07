@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>表单提交成功</title>
+    <meta http-equiv="refresh" content="1; url={{ next }}">
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">系统已经接收了您提供的参数</h3>
+            </div>
+            <div class="panel-body">
+                <h1>页面正在自动跳转....</h1>
+
+                <div class="row">
+                    <div class="col-xs-offset-10 col-xs-1">
+                        <a class="btn btn-primary" href="{{ next }}">立即跳转</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

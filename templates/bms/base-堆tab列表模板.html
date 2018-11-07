@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/">返回 <span class="glyphicon glyphicon-share-alt"></span></a></li>
+    <li role="presentation"{% if type == "heap" %} class="active"{% endif %}><a href="/bms/0/"><strong>{{ bms_name }}总览</strong></a></li>
+    <li role="presentation"{% if type == "heap-grid" %} class="active"{% endif %}><a href="/bms/{{ bms_id }}/grid/">充放电记录曲线 <span class="glyphicon glyphicon-random"></span></a></li>
+    <li role="presentation"{% if type == "heap-yaotiao" %} class="active"{% endif %}><a href="/bms/{{ bms_id }}/yaotiao/">遥调 {% if not request.user.is_superuser %}(只读){% endif %}</a></li>
+    {% for group_id in group_id_list %}
+    <li role="presentation">
+        <a href="/bms/{{ bms_id }}/group/{{ group_id }}/">{{ group_id | add:"1" }}#电池组信息</a>
+    </li>
+    {% endfor %}
+</ul>

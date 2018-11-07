@@ -1,0 +1,204 @@
+.datagroup {
+    color: #FFFFFF;
+    width: 400px;
+    left: 40px;
+    float: left;
+    position: absolute;
+}
+
+.group-title {
+    font-size: 25px;
+}
+
+.dataitem {
+    position: relative;
+    border-width: 1px;
+    border-style: none;
+    padding: 1px;
+    float: left;
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.item-name {
+    position: relative;
+    text-indent: 25px;
+    font-size: 18px;
+    color: #009FE8;
+    float: left;
+    width: 150px;
+}
+
+.item-body {
+    position: relative;
+    float: left;
+    text-align: right;
+    width: 100px;
+}
+
+.item-unit {
+    position: relative;
+    font-style: italic;
+    text-indent: 15px;
+    float: left;
+    width: 45px;
+}
+
+.datagrid {
+    position: absolute;
+    float: left;
+    background-color: #f0f0f0;
+    left: 40px;
+    top: 500px;
+    width: 450px;
+    height: 400px;
+}
+
+.grid-title {
+    position: absolute;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    //background-color: #FF0000;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #0f0f0f;
+}
+
+.grid-body {
+    position: absolute;
+    //background-color: #eaff13;
+    top: 35px;
+    width: 450px;
+    height: 360px;
+}
+
+.grid-leg-panel {
+    position: absolute;
+    font-style: italic;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #0f0f0f;
+    //background-color: #50ff34;
+    top: 345px;
+    width: 450px;
+    height: 60px;
+    text-align: center;
+}
+
+.grid-leg {
+    position: relative;
+    //background-color: #2eaaff;
+    float: left;
+    width: 225px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.grid-leg .grid-leg1 {
+    position: relative;
+    background-color: #FF0000;
+    float: right;
+    left: -30px;
+    width: 40px;
+    height: 3px;
+    top: 8px;
+}
+
+.grid-leg .grid-leg2 {
+    position: relative;
+    background-color: #ff63e0;
+    float: right;
+    left: -30px;
+    width: 40px;
+    height: 3px;
+    top: 8px;
+}
+
+.grid-leg .grid-leg3 {
+    position: relative;
+    background-color: #1f5eff;
+    float: right;
+    left: -30px;
+    width: 40px;
+    height: 3px;
+    top: 8px;
+}
+
+.grid-leg .grid-leg4 {
+    position: relative;
+    background-color: #39ac25;
+    float: right;
+    left: -30px;
+    width: 40px;
+    height: 3px;
+    top: 8px;
+}
+
+.subdata-panel {
+    position: absolute;
+    float: left;
+    top: 60px;
+    left: 500px;
+    width: 750px;
+    height: 900px;
+    //background-color: #0f0f0f;
+}
+
+.subdata-title {
+    position: relative;
+    float: left;
+    top: 10px;
+    left: 30px;
+    width: 720px;
+}
+
+.subdata-body {
+    position: relative;
+    float: left;
+    top: 00px;
+    left: 30px;
+    width: 720px;
+}
+
+.battery-item {
+    position: relative;
+    float: left;
+    font-size: 15px;
+    line-height: 16px;
+    width: 90px;
+    padding-left: 5px;
+    padding-right: 5px;
+    //background-color: #FF0000;
+    color: #FFFFFF;
+}
+
+.battery-index {
+    color: #009FE8;
+}
+
+.battery-item-100 {
+    font-size: 25px;
+    line-height: 30px;
+    width: 180px;
+}
+
+.battery-item-200 {
+    font-size: 18px;
+    line-height: 24px;
+    width: 120px;
+}
+
+.battery-item-300 {
+    font-size: 15px;
+    line-height: 18px;
+    width: 100px;
+}
+
+.battery-item .battery-body {
+    text-align: left;
+    text-indent: 8px;
+}
+
+

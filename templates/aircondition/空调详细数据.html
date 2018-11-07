@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>空调列表</title>
+    {% include "base-界面head.html" %}
+    <style>
+        .air {
+            border-color: #f0f0f0 #000000 #000000 #f0f0f0;
+            border-style: solid;
+            border-width: 1px;
+            margin-top: 30px;
+        }
+
+        .air:hover {
+            border-color: #f00000 #f00000 #f00000 #f00000;
+            cursor: pointer;
+        }
+        .air-img {
+            width: 100px;
+            height: 200px;
+            background-image: url("/static/imgs/air.png");
+            background-size: 100px 200px;
+        }
+        .air-info, .td {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="air">
+                    <div class="air-img center-block"></div>
+                    <div class="air-info">
+                        <table class="table table-striped table-condensed table-bordered" style="margin-bottom: 0">
+                            <tr>
+                                <th class="text-justify">设备编号</th>
+                                <td>{{ air.id }} #</td>
+                            </tr>
+                            <tr>
+                                <th>设备状态</th>
+                                <td>
+                                    {% if air.空调遥测信息.设备工作状态 == 2 %}
+                                        <span class="glyphicon glyphicon-play text-success fastblink"> 运行</span>
+                                    {% elif air.空调遥测信息.设备工作状态 == 1 %}
+                                        <span class="glyphicon glyphicon-pause text-success"> 待机</span>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-remove-sign text-danger blink"> 故障</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <!--tr>
+                                <th>工作模式</th>
+                                <td>
+                                    {% if air.mode == '制冷' %}
+                                        <span class="glyphicon glyphicon-asterisk text-success"> {{ air.mode }}</span>
+                                    {% elif air.mode == '制热' %}
+                                        <span class="glyphicon glyphicon-fire text-danger"> {{ air.mode }}</span>
+                                    {% elif air.mode == '通风' %}
+                                        <span class="glyphicon glyphicon-retweet text-warning"> {{ air.mode }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr-->
+                            <tr>
+                                <th>柜外温度</th>
+                                <td>{{ air.空调遥测信息.柜外温度 }} ℃</td>
+                            </tr>
+                            <tr>
+                                <th>送风温度</th>
+                                <td>{{ air.空调遥测信息.送风温度 }} ℃</td>
+                            </tr>
+                            <tr>
+                                <th>设备运行时间</th>
+                                <td>{{ air.空调遥测信息.设备运行时间 }} 小时</td>
+                            </tr>
+                        </table>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

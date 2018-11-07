@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>参数设置页面</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <script rel="stylesheet" src="/static/js/jquery.js" ></script>
+    <script rel="stylesheet" src="/static/js/jquery.url.1.0.js" ></script>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script rel="stylesheet" src="/static/js/global.js" ></script></head>
+    <script rel="stylesheet" src="/static/js/function_settings.js" charset="utf8" ></script>
+    <link rel="stylesheet" href="/static/css/settings.css" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="/page/"><img class="navbar-brand" href="#" src="/static/imgs/logo.png" /></a>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a id="save" href="#"><span class="glyphicon glyphicon-save"></span> 保存</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+
+    <div class="container" id="id_body">
+        <div style="display: none" class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>成功!</strong> 参数已经保存！
+        </div>
+        <div style="display: none" class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>失败!</strong> 参数保存失败！
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+
+            <li role="presentation"><a href="/">
+                返回 <span class="glyphicon glyphicon-share-alt"></span></a>
+            </li>
+
+            <li role="presentation" {% if request.path == "/ems/" %}class="active"{% endif %}>
+                <a href="/ems/">能量管理系统总览</a>
+            </li>
+
+            <li role="presentation" {% if request.path == "/ems/settings/" %}class="active"{% endif %}>
+                <a href="/ems/settings/">参数配置{% if not request.user.is_superuser %}(只读){% endif %}</a>
+            </li>
+
+            {% if request.user.is_superuser %}
+                <li role="presentation" {% if request.path == "/ems/options/" %}class="active"{% endif %}>
+                    <a href="/ems/options/">应用场景选项</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</div>

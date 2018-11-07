@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "ems/base-选项卡.html" %}
+
+        <form class="form-horizontal" method="post" action="{{ request.path }}">
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="radio" name="应用场景" value="风光新能源电站" {% if ems.应用场景 == "风光新能源电站" %}checked{% endif %} />
+                            <label>风光新能源电站</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-11">
+                            <input type="radio" name="风光新能源电站mode" value="应用模式1" {% if ems.风光新能源电站mode == "应用模式1" %}checked{% endif %} />
+                            <label>应用模式1</label>
+                            <p class="help-block">按预设模式运行.</p>
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-11">
+
+                            <input type="radio" name="风光新能源电站mode" value="应用模式2" {% if ems.风光新能源电站mode == "应用模式2" %}checked{% endif %} />
+                            <label>应用模式2</label>
+                            <p class="help-block">新能源不发电储能不放电.</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="radio" name="应用场景" value="调频等辅助服务" {% if ems.应用场景 == "调频等辅助服务" %}checked{% endif %} />
+                            <label>调频等辅助服务</label>
+                            <p class="help-block">包含AGC系统.</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="radio" name="应用场景" value="用户侧" {% if ems.应用场景 == "用户侧" %}checked{% endif %} />
+                            <label>用户侧</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-11">
+                            <label>用户并网端的总功率: </label>
+                            <input type="text" name="用户并网端的总功率" value="{{ ems.用户并网端的总功率 }}" />
+                            <p class="help-block">我们根据此来实时采集负荷功率甚至预测负荷变化，调整我们的充放电功率，以不使容量费增加.</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">保存</button>
+        </form>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

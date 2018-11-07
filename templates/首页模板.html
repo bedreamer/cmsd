@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>首页{{ name }}</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+        <div class="text-right text-gray">系统电气/通讯框图</div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="#" class="thumbnail">
+                    <img src="/static/imgs/main.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

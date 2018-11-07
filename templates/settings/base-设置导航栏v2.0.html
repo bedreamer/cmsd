@@ -1,0 +1,151 @@
+<style>
+    .sidebar {
+        position: absolute;
+        top: 50px;
+        width: 15%;
+    }
+    .sidebar .sideitem {
+        background-color: #f8f8f8;
+        padding: 0px;
+        left: 0px;
+        height: 25px;
+        line-height: 25px;
+        font-size: 16px;
+        color: #777777;
+        border-bottom: #8c8c8c 1px solid;
+        border-right: #8c8c8c 1px solid;
+        text-indent: 1em;
+        text-align: justify-all;
+    }
+    .sidebar .sideitem-lg {
+        height: 30px;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .sidebar .active {
+        background-color: #4B366B;
+        color: #2eaaff;
+        border-right: #A84442 8px solid;
+    }
+    .sideitem:hover {
+        background-color: #5c5c5c;
+    }
+    .noindent {
+        text-indent: 0em;
+    }
+</style>
+<div class="sidebar">
+    <a href="/settings/">
+        <div class="sideitem sideitem-lg{% if request.path == '/settings/' %} active{% endif %}" style="text-indent: 0.2em; color: #0f0f0f">
+            <span class="glyphicon glyphicon-cog"></span> <strong>系统参数配置</strong>
+        </div>
+    </a>
+    <a href="/settings/scada_com/">
+        <div class="sideitem{% if request.path == '/settings/scada_com/' %} active{% endif %}">监控通讯参数</div>
+    </a>
+    <a href="/settings/cloud/">
+        <div class="sideitem{% if request.path == '/settings/cloud/' %} active{% endif %}">云平台参数</div>
+    </a>
+    <a href="/settings/peripheral/">
+        <div class="sideitem{% if request.path == '/settings/peripheral/' %} active{% endif %}">外设数量</div>
+    </a>
+    <a href="/settings/video/">
+        <div class="sideitem{% if request.path == '/settings/video/' %} active{% endif %}">安防视频参数</div>
+    </a>
+    <a href="/settings/firecontrol/">
+        <div class="sideitem{% if request.path == '/settings/firecontrol/' %} active{% endif %}">消防参数</div>
+    </a>
+    <a href="/settings/airconditioner/">
+        <div class="sideitem{% if request.path == '/settings/airconditioner/' %} active{% endif %}">空调参数</div>
+    </a>
+    <a href="/settings/gpio/">
+        <div class="sideitem{% if request.path == '/settings/gpio/' %} active{% endif %}">开入/开出</div>
+    </a>
+    <a href="/settings/inv/">
+        <div class="sideitem{% if request.path == '/settings/inv/' %} active{% endif %}">* 光伏逆变器参数</div>
+    </a>
+    <a href="/settings/pcs/">
+        <div class="sideitem{% if request.path == '/settings/pcs/' %} active{% endif %}">* PCS参数</div>
+    </a>
+    <a href="/settings/bms/">
+        <div class="sideitem{% if request.path == '/settings/bms/' %} active{% endif %}">* BMS参数</div>
+    </a>
+    <a href="/settings/battery/">
+        <div class="sideitem{% if request.path == '/settings/battery/' %} active{% endif %}">*  电池及pack参数</div>
+    </a>
+
+    <small>&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span> 标注 * 的页面需要专业技能知识!</small>
+
+    <hr>
+    {% if request.user.username == 'admin' %}
+    <a href="/settings/dev/autorun/">
+        <div class="sideitem{% if request.path == '/settings/dev/autorun/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-sort-by-order text-danger noindent"></span> 自动启动顺序
+        </div>
+    </a>
+    <a href="/settings/dev/collector/">
+        <div class="sideitem{% if request.path == '/settings/dev/collector/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-asterisk text-danger noindent"></span> 采集器控制
+        </div>
+    </a>
+    {% endif %}
+
+    <a href="/settings/report/">
+        <div class="sideitem{% if request.path == '/settings/report/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-equalizer text-danger noindent"></span> 报表控制
+        </div>
+    </a>
+    <a href="/settings/general/">
+        <div class="sideitem{% if request.path == '/settings/general/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-wrench text-danger noindent"></span> 通用选项
+        </div>
+    </a>
+    <a href="/settings/bell/">
+        <div class="sideitem{% if request.path == '/settings/bell/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-bell text-danger noindent"></span> 声光报警设置
+        </div>
+    </a>
+    <a href="/settings/datetime/">
+        <div class="sideitem{% if request.path == '/settings/datetime/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-time text-danger noindent"></span> 系统日期时间
+        </div>
+    </a>
+    <a href="/settings/password/">
+        <div class="sideitem{% if request.path == '/settings/password/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-lock text-danger noindent"></span> 修改密码
+        </div>
+    </a>
+    <a href="/settings/backup/">
+        <div class="sideitem{% if request.path == '/settings/backup/' %} active{% endif %}">
+            <span class="glyphicon glyphicon-duplicate text-danger noindent"></span> 备份/恢复
+        </div>
+    </a>
+
+    <hr>
+    <button class="btn btn-block btn-warning" id="id_sync">
+        <span class="glyphicon glyphicon-refresh"></span>
+        同步参数
+    </button>
+    <hr>
+
+    <a class="btn btn-block btn-success" id="id_commit">保存参数</a>
+    <a class="btn btn-block btn-primary">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</a>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+       $("#id_commit").click(function () {
+           $("#commit-button").click();
+       });
+
+       $("#id_sync").click(function () {
+           $("#id_sync").attr('disabled', true);
+           $.getJSON("/settings/refresh/", '', function (data, status, xhr) {
+               $("#id_sync").attr('disabled', false);
+           }).fail(function () {
+               $("#id_sync").attr('disabled', false);
+           });
+       });
+    });
+</script>

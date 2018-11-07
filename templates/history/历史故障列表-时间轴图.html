@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>事件记录</title>
+    {% include "base-界面head.html" %}
+    <style>
+        .fish {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .fishbody {
+            position: relative;
+            float: left;
+            width: 150px;
+            height: 680px;
+            white-space:nowrap;
+
+            font-size: x-small;
+            //font-size: 8px;
+        }
+
+        .econtext {
+            white-space:pre-wrap;
+        }
+
+        .top .fishcontent {
+            width: 100%;
+            height: 50%;
+            border-left: #467fdb dashed 3px;
+
+            border-bottom-style: solid;
+            border-bottom-width: 3px;
+            border-bottom-color: #761c19;
+            margin-bottom: 3px;
+        }
+
+        .bottom .fishcontent {
+            width: 100%;
+            height: 50%;
+            border-left: #89c7ff dashed 3px;
+
+            border-top-style: solid;
+            border-top-width: 3px;
+            border-top-color: #761c19;
+
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        {% include "base-一级目录选项卡模板.html" %}
+
+        {% if records_count == 0 %}
+            <h1>&nbsp;</h1>
+            <div class="alert alert-success" role="alert">还没有事件记录！</div>
+        {% else %}
+            <div class="row">
+                <table class="table table-bordered table-striped table-condensed table-responsive table-hover text-center">
+                    <caption>
+                        {% include "history/base-历史事件入口列表.html" %}
+                    </caption>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-1">
+                    <h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1>
+                    {% if show_page == 0 %}
+                    <a href="#"><span class="glyphicon glyphicon-chevron-left text-gray" style="font-size: 60px"></span></a>
+                    {% else %}
+                    <a href="{{ request.path }}?page={{ show_page | add:"-1" }}&count=5"><span class="glyphicon glyphicon-chevron-left" style="font-size: 60px"></span></a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-10">
+                    <div class="fish">
+                        {% for record in records_list %}
+                        <div class="fishbody {% if forloop.counter|divisibleby:2 %}top{% else %}bottom{% endif %}">
+                            <div class="fishcontent">
+                                {% if not forloop.counter|divisibleby:2 %}<h3>&nbsp;</h3><h4>&nbsp;</h4>{% endif %}
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <tr>
+                                        <th>ID</th>
+                                        <td>{{ record.ueid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><span class="glyphicon glyphicon-play text-success"></span></th>
+                                        <td>{{ record.etsp_begin | date:"Y-m-d H:i:s" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><span class="glyphicon glyphicon-stop text-danger"></span></th>
+                                        <td><span>{{ record.etsp_end | date:"Y-m-d H:i:s" }}</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>代码</th>
+                                        <td>{{ record.ecode }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>来源</th>
+                                        <td>{{ record.eclass }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>级别</th>
+                                        <td>{{ record.elevel }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>摘要</th>
+                                        <td>{{ record.abstrct }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th><span class="glyphicon glyphicon-paperclip"></span></th>
+                                        <td class="econtext">{% if record.econtext == '' %}无{% else %}{{ record.econtext|safe }}{% endif %}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1><h1>&nbsp;</h1>
+                    {% if show_page == page_number %}
+                    <a href="#" disabled="true"><span class="glyphicon glyphicon-chevron-right text-gray" style="font-size: 60px"></span></a>
+                    {% else %}
+                    <a href="{{ request.path }}?page={{ show_page | add:"1" }}&count=5"><span class="glyphicon glyphicon-chevron-right" style="font-size: 60px"></span></a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        {% if pages_count > 1 %}
+            <div class="row text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="{{ request.path }}?page=0&count=6" aria-label="top">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% for page in page_list %}
+                        <li {% if page == show_page %}class="active" {% endif %}><a href="{{ request.path }}?page={{ page }}&count=5">{{ page | add:"1" }}</a></li>
+                    {% endfor %}
+                    <li>
+                    <a href="{{ request.path }}?page={{ pages_count | add:"-1" }}&count=5" aria-label="bottom">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

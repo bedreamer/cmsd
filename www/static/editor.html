@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>页面编辑器</title>
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/jquery.cookie.js" ></script>
+    <script src="/static/js/jquery.wheel.1.0.js" ></script>
+    <link rel="stylesheet" href="/static/css/dianli.css" charset="utf-8"/>
+    <link rel="stylesheet" href="/static/css/editor.css" charset="utf-8"/>
+    <link rel="stylesheet" href="/static/css/theme/theme-default.css" charset="utf-8"/>
+    <script type="application/javascript" src="/static/js/draw.1.1.js"></script>
+    <script type="application/javascript" src="/static/js/editor.1.0.js"></script>
+</head>
+<body>
+    <div class="tools-panel">
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment1"></a></div>
+            <div class="selector-name">I类母线</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment2"></a></div>
+            <div class="selector-name">II类母线</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment3"></a></div>
+            <div class="selector-name">III类母线</div>
+        </div>
+
+        <hr>
+
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment4"></a></div>
+            <div class="selector-name">连接线1</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment5"></a></div>
+            <div class="selector-name">连接线2</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment6"></a></div>
+            <div class="selector-name">连接线3</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment7"></a></div>
+            <div class="selector-name">连接线4</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment8"></a></div>
+            <div class="selector-name">连接线5</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment9"></a></div>
+            <div class="selector-name">连接线6</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment10"></a></div>
+            <div class="selector-name">连接线7</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment11"></a></div>
+            <div class="selector-name">连接线8</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="segment segment12"></a></div>
+            <div class="selector-name">连接线9</div>
+        </div>
+
+        <hr>
+
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="labletext"><u>Lable</u></a></div>
+            <div class="selector-name">标签</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="yaoce"><i>遥测</i></a></div>
+            <div class="selector-name">遥测</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face"><a href="#" class="yaoxin"><i>遥信</i></a></div>
+            <div class="selector-name">遥信</div>
+        </div>
+
+        <hr>
+        <div class="selector">
+            <div class="selector-face icon bianyaqi"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">变压器</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon kaiguan"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">开关</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon rongduanqi"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">熔断器</div>
+        </div>
+
+        <div class="selector">
+            <div class="selector-face icon huodianchang"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">火电厂</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon fengdianchang"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">风电场</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon shuidianzhan"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">水电站</div>
+        </div>
+
+        <div class="selector">
+            <div class="selector-face icon chaiyouji"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">柴油机</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon hedianzhan"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">核电站</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon gongchang"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">工厂</div>
+        </div>
+
+        <div class="selector">
+            <div class="selector-face icon guangfuban"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">光伏板</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon nibianqi"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">逆变器</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon PCS"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">PCS</div>
+        </div>
+
+        <div class="selector">
+            <div class="selector-face icon xudianchi"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">蓄电池</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon feilun"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">飞轮</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon chaojidianrong"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">超级电容</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon shujubeijingkuang"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">数据背景框</div>
+        </div>
+        <div class="selector">
+            <div class="selector-face icon shujuzuhekuang"><a href="#">&nbsp;&nbsp;&nbsp;</a></div>
+            <div class="selector-name">数据组合框</div>
+        </div>
+
+    </div>
+    <div class="paint-panel">
+        <div class="txt_box">
+            <textarea id="id_content" rows="8" cols="58"></textarea>
+        </div>
+        <div class="config_panel">
+            <form id="config">
+                <label>ID: <input name="id"></label>
+                <label>数据源地址:<input name="datasource"></label>
+            </form>
+            <button id="id_save">保存</button>
+            <button id="id_restore">还原</button>
+        </div>
+    </div>
+    <canvas class="mycanvas" id="c" width="1280px" height="1024px"></canvas>
+    <div class="edior_box" style="display: none">
+        <span class="editor_button ke-icon-close"></span>
+        <span class="editor_button ke-icon-bold"></span>
+        <span class="editor_button ke-icon-italic"></span>
+        <span class="editor_button ke-icon-underline"></span>
+        <span class="editor_button ke-icon-justifyleft"></span>
+
+        <select class="editor_button ke-icon-fontsize" name="font_size">
+            <option value="5">5px</option>
+            <option value="8">8px</option>
+            <option value="10">10px</option>
+            <option value="12">12px</option>
+            <option value="15">15px</option>
+            <option value="18">18px</option>
+            <option value="20">20px</option>
+            <option value="25">25px</option>
+            <option value="30">30px</option>
+            <option value="40">40px</option>
+        </select>
+        <input class="color_inputer" name="color" type="color">
+
+        <span class="editor_button ke-icon-clear"></span>
+        <span class="editor_button editor_lable">&nbsp;数据内容:</span>
+        <input class="value_inputer" name="data" type="text">
+        <span class="editor_button editor_lable_strip">&nbsp;宽:</span>
+        <input class="value_inputer value_inputer_strip" name="width" type="text">
+        <span class="editor_button editor_lable_strip">&nbsp;高:</span>
+        <input class="value_inputer value_inputer_strip" name="height" type="text">
+
+        <span class="editor_button ke-icon-ok"></span>
+    </div>
+</body>
+</html>

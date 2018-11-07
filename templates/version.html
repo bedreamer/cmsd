@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <table class="table">
+            <caption>系统软件版本列表</caption>
+            {% for key, ver in version.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ ver }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

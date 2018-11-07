@@ -1,0 +1,225 @@
+/*主题文件*/
+
+/*变压器*/
+.bianyaqi {
+    background-image: url("/static/imgs/dl/bianyaqi.png");
+}
+
+/*开关*/
+.kaiguan {
+    background-image: url("/static/imgs/dl/2.png");
+}
+
+/*熔断器*/
+.rongduanqi {
+    background-image: url("/static/imgs/dl/3.png");
+}
+
+/*火电厂*/
+.huodianchang {
+    background-image: url("/static/imgs/dl/4.png");
+}
+
+/*风电场*/
+.fengdianchang {
+    background-image: url("/static/imgs/dl/5.png");
+}
+
+/*水电站*/
+.shuidianzhan {
+    background-image: url("/static/imgs/dl/6.png");
+}
+
+/*熔断器*/
+.rongduanqi {
+    background-image: url("/static/imgs/dl/rongduanqi.png");
+}
+
+/*核电站*/
+.hedianzhan {
+    background-image: url("/static/imgs/dl/hedianzhan.png");
+}
+
+/*工厂*/
+.gongchang {
+    background-image: url("/static/imgs/dl/9.png");
+}
+
+/*光伏板*/
+.guangfuban {
+    background-image: url("/static/imgs/dl/10.png");
+}
+
+/*逆变器*/
+.nibianqi {
+    background-image: url("/static/imgs/dl/11.png");
+}
+
+/*PCS*/
+.PCS {
+    background-image: url("/static/imgs/dl/12.png");
+}
+
+/*蓄电池*/
+.xudianchi {
+    background-image: url("/static/imgs/dl/20.png");
+}
+
+/*飞轮*/
+.feilun {
+    background-image: url("/static/imgs/dl/14.png");
+}
+
+/*超级电容*/
+.chaojidianrong {
+    background-image: url("/static/imgs/dl/15.png");
+}
+
+/*数据背景框*/
+.shujubeijingkuang{
+    background-image: url("/static/imgs/dl/background.png");
+}
+
+/*一类母线*/
+.segment1 {
+    background-color: #993327;
+    position: absolute;
+    float: left;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    top: 20px;
+}
+
+/*二类母线*/
+.segment2 {
+    background-color: #16618b;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 8px;
+    top: 21px;
+}
+
+/*三类母线*/
+.segment3 {
+    background-color: #d3a243;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 6px;
+    top: 22px;
+}
+
+.segment4 {
+    background-color: #993327;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment5 {
+    background-color: #16618b;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment6 {
+    background-color: #d3a243;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment7 {
+    background-color: #ffffff;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment8 {
+    background-color: #000000;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment9 {
+    background-color: #034d3e;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment10 {
+    background-color: #2a416a;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment11 {
+    background-color: #584c9e;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.segment12 {
+    background-color: #0075aa;
+    position: absolute;
+    left: 0;
+    float: left;
+    width: 100%;
+    height: 4px;
+    top: 23px;
+}
+
+.labletext {
+    font-size: 20px;
+    color: #014076;
+}
+
+.yaoce {
+    font-size: 18px;
+    color: #d9c4a9;
+}
+
+.yaoxin {
+    font-size: 18px;
+    color: #ab253d;
+}
+
+.icon {
+    font-size: 10px;
+    background-size:100% 100%;
+    color: #ffffff;
+}

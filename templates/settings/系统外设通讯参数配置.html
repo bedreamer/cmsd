@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+    <style>
+        th {
+            width: 40px;
+        }
+
+        .inputter {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2">
+                {% include "settings/base-设置导航栏.html" %}
+            </div>
+            <div class="col-xs-9">
+                <div class="row">
+                   <div class="col-xs-11">
+                        <h1><span class="glyphicon glyphicon-wrench"></span> 外设通讯参数配置</h1>
+                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form class="form-horizontal" action="/settings/downcomm/" method="post">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <table class="table table-condensed table-bordered">
+                                        <caption>
+                                            BMS通讯参数配置
+                                            （<span class="glyphicon glyphicon-question-sign"></span>
+                                            <small style="color: gray;">没有需要的型号, <a href="#">编辑/添加</a>设备型号.</small>）
+                                        </caption>
+                                        {% for bms in bms_comm_list %}
+                                        <tr>
+                                            <th>{{ forloop.counter }}#</th>
+                                            <td>
+                                                <select style="width: 100%; height: 25px; text-align: right" name="BMS型号[]">
+                                                    {% for b in supported_bms_list %}
+                                                    <option value="{{ b.value }}" {% if bms.model == b.value %}selected{% endif %}>{{ b.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td><input type="text" class="inputter" name="BMS通讯地址[]" value="{{ bms.address }}"></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="col-xs-4">
+                                    <table class="table table-condensed table-bordered">
+                                        <caption>
+                                            PCS通讯参数配置
+                                            （<span class="glyphicon glyphicon-question-sign"></span>
+                                            <small style="color: gray;">没有需要的型号, <a href="#">编辑/添加</a>设备型号.</small>）
+                                        </caption>
+                                        {% for pcs in pcs_comm_list %}
+                                        <tr>
+                                            <th>{{ forloop.counter }}#</th>
+                                            <td>
+                                                <select style="width: 100%; height: 25px; text-align: right" name="PCS型号[]">
+                                                    {% for b in supported_pcs_list %}
+                                                    <option value="{{ b.value }}" {% if pcs.model == b.value %}selected{% endif %}>{{ b.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td><input type="text" class="inputter" name="PCS通讯地址[]" value="{{ pcs.address }}"></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="col-xs-4">
+                                    <table class="table table-condensed table-bordered">
+                                        <caption>
+                                            逆变器通讯参数配置
+                                            （<span class="glyphicon glyphicon-question-sign"></span>
+                                            <small style="color: gray;">没有需要的型号, <a href="#">编辑/添加</a>设备型号.</small>）
+                                        </caption>
+                                        {% for inv in inv_comm_list %}
+                                        <tr>
+                                            <th>{{ forloop.counter }}#</th>
+                                            <td>
+                                                <select style="width: 100%; height: 25px; text-align: right" name="逆变器型号[]">
+                                                    {% for b in supported_inv_list %}
+                                                    <option value="{{ b.value }}" {% if inv.model == b.value %}selected{% endif %}>{{ b.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td><input type="text" class="inputter" name="逆变器通讯地址[]" value="{{ inv.address }}"></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                        <small style="color: gray;">没有使用到的设备，配置框留空即可.</small>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <input type="submit" class="btn btn-primary btn-block" value="保存"></input>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

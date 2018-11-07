@@ -1,0 +1,65 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <a href="/"><img class="navbar-brand" href="#" src="/static/imgs/logo.png" /></a>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_warnings_count > 0 %}
+            <li>
+                <a href="/history/current/all/" class="btn btn-lg btn-warning blink" style="height:30px; padding-top: 3px; color: #f0f0f0; margin: 10px 5px 0px 0px;">
+                    <span class="glyphicon glyphicon-warning-sign"> {{ current_warnings_count }}个告警</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if current_errors_count > 0 %}
+            <li>
+                <a href="/history/current/all/" class="btn btn-lg btn-danger blink" style="height:30px; padding-top: 3px; color: #f0f0f0; margin: 10px 5px 0px 0px;">
+                    <span class="glyphicon glyphicon-remove-sign">{{ current_errors_count }}个故障</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if request.path != "/version/" %}
+                <li>
+                    <a href="/version/?next={{ request.path }}">
+                        <span style="color: #2eaaff" id="id_datetime"></span>&nbsp;
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ next }}">
+                        <span class="glyphicon glyphicon-share-alt">返回</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if request.user.is_anonymous %}
+                <li>
+                    <a href="/admin/login/?next=/">
+                        <span class="glyphicon glyphicon-user text-danger">登录</span>
+                    </a>
+                </li>
+            {% elif request.user.is_superuser %}
+                {% if pageclass != "settings"  %}
+                <li>
+                    <a href="/settings/">
+                        <span class="glyphicon glyphicon-wrench">设置</span>
+                    </a>
+                </li>
+                {% endif %}
+            {% endif %}
+
+            {% if not request.user.is_anonymous %}
+                <li>
+                    <a href="/">
+                        <span class="glyphicon glyphicon-user">{{ request.user.username }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout/?cancel={{ request.path }}">
+                        <span class="glyphicon glyphicon-off text-danger"></span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

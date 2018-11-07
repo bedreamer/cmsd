@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/showdata.css" />
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/jquery.url.1.0.js" ></script>
+    <script src="/static/js/jquery.wheel.1.0.js" ></script>
+<script src="/static/js/function_battery.js" charset="utf8" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/settings/"><span class="glyphicon glyphicon-wrench"></span> 设置</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" id="id_body">
+        <div class="datagroup">
+            <span class="group-title">{{ page.name }}</span>
+            <hr>
+            <div class="dataitem">
+                <span class="item-name">当前电压</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/电池堆电压" convert="k=100&b=0">0.0</span>
+                <span class="item-unit">V</span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">当前电流</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/电池堆电流" convert="k=100&b=0">0.0</span>
+                <span class="item-unit">A</span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">当前SOC</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/电池堆SOC" convert="k=100&b=0">100</span>
+                <span class="item-unit">%</span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">当前SOH</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/电池堆SOH" convert="k=100&b=0">1.0</span>
+                <span class="item-unit"></span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">累计充电量</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/累计充电容量" convert="k=100&b=0">0.0</span>
+                <span class="item-unit">kw.h</span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">累计放电量</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/累计放电容量" convert="k=100&b=0">0.0</span>
+                <span class="item-unit">kw.h</span>
+            </div>
+
+            <div class="dataitem">
+                <span class="item-name">可用能量</span>
+                <span class="item-body" datapath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/可用能量" convert="k=100&b=0">0.0</span>
+                <span class="item-unit">kw.h</span>
+            </div>
+        </div>
+        <div class="datagrid">
+            <span class="grid-title">电池充放电曲线</span>
+            <canvas class="grid-body"></canvas>
+            <div class="grid-leg-panel" style="display: none">
+                <span class="grid-leg" gridpath=""><span class="grid-leg1"></span>电压</span>
+                <span class="grid-leg" gridpath=""><span class="grid-leg2"></span>电流</span>
+            </div>
+        </div>
+        <div class="subdata-panel">
+            <div class="subdata-title">
+                <a class="btn btn-default voltage" arraypath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/单体电池电压" convert="k=1000&b=0&dot=3">单体电压</a>
+                <a class="btn btn-primary temperature" arraypath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/单体电池温度" convert="k=100&b=0">单体温度</a>
+                <a class="btn btn-warning singlesoc" arraypath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/单体电池SOC" convert="k=100&b=0">单体SOC</a>
+                <a class="btn btn-danger singlesoh"  arraypath="/BMS数据块/{{ page.devicesn }}/BMS遥测信息/单体电池SOH" convert="k=100&b=0">单体SOH</a>
+                <hr>
+            </div>
+            <div class="subdata-body">
+                {% for idx in bat %}
+                    {% if batcount <= 100 %}
+                    <div class="battery-item battery-item-100">
+                    {% elif batcount <= 200 %}
+                    <div class="battery-item battery-item-200">
+                    {% elif batcount <= 300 %}
+                    <div class="battery-item battery-item-300">
+                    {% else %}
+                    <div class="battery-item">
+                    {% endif %}
+                    <span class="battery-index">{{ forloop.counter }}:</span>
+                    <span id="id_battery_{{ forloop.counter }}" class="battery-body">0.00</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            {% for page in pages %}
+                {% if pid == page.id %}
+                    <li class="active"><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% else %}
+                    <li><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if request.user.is_superuser %}
+                <li><a href="/editor/page/new/"><span class="glyphicon glyphicon-plus"></span>添加页面</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </nav>
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

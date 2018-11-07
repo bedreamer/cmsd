@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>没有可显示页面</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_anonymous %}
+                <li><a href="/admin/login/?next=/"><span class="glyphicon glyphicon-user"></span> 登录 </a></li>
+                {% else %}
+                <li><a href="/"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/settings/"><span class="glyphicon glyphicon-wrench"></span> 设置</a></li>
+                <li><a href="/admin/logout/?next=/"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="alert alert-danger" role="alert">
+            <h3>没有可以显示的页面，您可以按以下提示操作：</h3>
+            <h5>&nbsp;</h5>
+            <ol>
+                <li><p>点击<a href="/editor/page/new/">这里</a>添加一个新的页面。</p></li>
+                <li><p>点击<a href="/editor/page/">这里</a>管理已有的页面。</p></li>
+            </ol>
+        </div>
+    </div>
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

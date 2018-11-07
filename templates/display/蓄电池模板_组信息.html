@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/showdata.css" />
+    <link rel="stylesheet" href="/static/css/battery_main.css" />
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/Chart.bundle.js" charset="utf8" ></script>
+    <script src="/static/js/function_grid.js" charset="utf8" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_superuser %}
+                    <li><a href="/admin/ui/element/add/?page={{ pid }}"><span class="glyphicon glyphicon-plus"></span>增加元素</a></li>
+                    <li><a><span class="divider">|</span></a></li>
+                    <li><a href="/admin/ui/grid/add/"><span class="glyphicon glyphicon-plus"></span>增加图表</a></li>
+                    <li><a><span class="divider">|</span></a></li>
+                    <li><a href="/datapoint/import/{{ page.id }}/?target=abstract"><span class="glyphicon glyphicon-import"></span>批量导入摘要</a></li>
+                    <li><a href="/datapoint/import/{{ page.id }}/?target=yaoce"><span class="glyphicon glyphicon-import"></span>批量导入遥测</a></li>
+                    <li><a href="/datapoint/import/{{ page.id }}/?target=yaoxin"><span class="glyphicon glyphicon-import"></span>批量导入遥信</a></li>
+                    <li><a><span class="divider">|</span></a></li>
+                {% endif %}
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/settings/"><span class="glyphicon glyphicon-wrench"></span> 设置</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid" id="id_body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="frame-title-arear">
+                    {{ page.name }}-摘要
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="frame-button-bar-arear">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary btn-block">单体电压</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-info btn-block">单体温度</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-warning btn-block">单体SOC</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-danger btn-block">单体SOH</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="frame-substract-arear">
+                    {% for ele in abstract_list %}
+                    <div class="title-arear-item">
+                        <span class="name">
+                            {{ ele.name }}{% if request.user.is_superuser %}
+                                <a href="/admin/ui/element/{{ ele.id }}/change/"><span style="text-indent: 0; font-size: 10px; color: #03507b" class="glyphicon glyphicon-edit"></span></a>
+                                <a href="/element/{{ ele.id }}/delete/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-remove"></span></a>
+                                <a href="/element/{{ ele.id }}/up/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-arrow-up"></span></a>
+                                <a href="/element/{{ ele.id }}/down/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #00FF00" class="glyphicon glyphicon-arrow-down"></span></a>
+                            {% endif %}
+                        </span>
+                        <span class="value" eid="{{ ele.id }}">{{ ele.value }}</span>
+                        <span class="unit">{{ ele.unit }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    {% for grid in grid_list %}
+                    <div class="col-sm-{{ grid.width }}">
+                        <div class="frame-grid-1-arear">
+                            <script>
+                            $(document).ready(function () {
+                                var lable = [{% for datetime in grid.datetime %}'{{ datetime }}'{% if not forloop.last %},{% endif %}{% endfor %}];
+                                {% for line in grid.records %}
+                                    var data_{{ forloop.counter }} = {{ line.value }};
+                                    var leg_{{ forloop.counter }} = "{{ line.name }}({{ line.unit }})";
+                                {% endfor %}
+                                var cav = document.getElementById("id_canvas_{{ grid.id }}")
+                                var ctx = cav.getContext('2d');
+                                var lineChartData = {
+                                    labels: lable,
+                                    datasets: [{
+                                        label: leg_1,
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        backgroundColor: 'rgb(255, 99, 132)',
+                                        fill: false,
+                                        data: data_1,
+                                        yAxisID: 'y-axis-1',
+                                    }, {
+                                        label: leg_2,
+                                        borderColor: 'rgb(54, 162, 235)',
+                                        backgroundColor: 'rgb(54, 162, 235)',
+                                        fill: false,
+                                        data: data_2,
+                                        yAxisID: 'y-axis-2'
+                                    }]
+                                };
+                                var line = Chart.Line(ctx, {
+                                    data: lineChartData,
+                                    options: {
+                                        responsive: false,
+                                        hoverMode: 'index',
+                                        stacked: false,
+                                        title: {
+                                            display: false,
+                                            text: '图表'
+                                        },
+                                        scales: {
+                                            yAxes: [{
+                                                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                                                display: true,
+                                                position: 'left',
+                                                id: 'y-axis-1',
+                                            }, {
+                                                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                                                display: true,
+                                                position: 'right',
+                                                id: 'y-axis-2',
+
+                                                // grid line settings
+                                                gridLines: {
+                                                    drawOnChartArea: false, // only want the grid lines for one axis to show up
+                                                },
+                                            }],
+                                        }
+                                    }
+                                });
+                                line.update();
+                            });
+                            </script>
+                            <canvas id="id_canvas_{{ grid.id }}"></canvas>
+                        </div>
+                        {% if request.user.is_superuser %}
+                            <a href="/admin/ui/element/{{ grid.id }}/change/"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="/collector/grid/{{ grid.id }}/bind/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #faff12" class="glyphicon glyphicon-link"></span></a>
+                            <a href="/show/grid/{{ grid.id }}/delete/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-remove"></span></a>
+                            <a href="/show/grid/{{ grid.id }}/up/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-arrow-left"></span></a>
+                            <a href="/show/grid/{{ grid.id }}/down/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #00FF00" class="glyphicon glyphicon-arrow-right"></span></a>
+                        {% endif %}
+
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="frame-yaoce-arear">
+                            <div class="yaoce-arear-title">
+                                遥测#
+                            </div>
+                            {% for ele in yaoce_list %}
+                            <div class="yaoce-arear-item">
+                                <span class="name">
+                                    {{ ele.name }}{% if request.user.is_superuser %}
+                                        <a href="/admin/ui/element/{{ ele.id }}/change/"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="/element/{{ ele.id }}/delete/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-remove"></span></a>
+                                        <a href="/element/{{ ele.id }}/up/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-arrow-left"></span></a>
+                                        <a href="/element/{{ ele.id }}/down/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #00FF00" class="glyphicon glyphicon-arrow-right"></span></a>
+                                    {% endif %}
+                                </span>
+                                <span class="unit">
+                                    <span class="value">{{ ele.value }}</span>
+                                    {{ ele.unit }}
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="frame-yaoxin-arear">
+                        <div class="col-sm-12">
+                            <div class="yaoxin-arear-title">
+                                遥信#
+                            </div>
+                            {% for ele in yaoxin_list %}
+                            <div class="yaoxin-arear-item">
+                                {% if ele.value %}<span class="value value-1"></span>{% else %}<span class="value value-0"></span>{% endif %}
+                                <span class="name">
+                                    {{ ele.name }}{% if request.user.is_superuser %}
+                                        <a href="/admin/ui/element/{{ ele.id }}/change/"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="/element/{{ ele.id }}/delete/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-remove"></span></a>
+                                        <a href="/element/{{ ele.id }}/up/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #FF0000" class="glyphicon glyphicon-arrow-left"></span></a>
+                                        <a href="/element/{{ ele.id }}/down/?next={{ request.path }}"><span style="text-indent: 0; font-size: 10px; color: #00FF00" class="glyphicon glyphicon-arrow-right"></span></a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            {% for page in pages %}
+                {% if pid == page.id %}
+                    <li class="active"><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% else %}
+                    <li><a href="/page/{{ page.id }}/">{{ page.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if request.user.is_superuser %}
+                <li><a href="/editor/page/new/"><span class="glyphicon glyphicon-plus"></span>添加页面</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </nav>
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

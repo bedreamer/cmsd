@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/page/{{ pid }}/"><span class="glyphicon glyphicon-share-alt"></span> 取消导入</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="center-block">
+            <div class="alert alert-info" role="alert">
+                导入一个csv文件来快速添加显示的数据点。
+                <h2 class="alert-danger">需要注意的是上传文件需要使用utf8格式！</h2>
+                <div class="alert-info">
+                    <h2>示例-摘要/遥测/遥信格式</h2>
+                    <pre>
+                        fullname,shortname,path,k,b,mask,dot,unit,type,records
+                        1#电池电压,电池电压,/v1.0/realtime/BMS数据块/0/遥测信息/电池电压,100,2,0x7fffffff,0,V,数字,1
+                        1#电池电流,电池电流,/v1.0/realtime/BMS数据块/0/遥测信息/电池电流,100,2,0x7fffffff,0,V,数字,1
+                    </pre>
+
+                    当前即将<span class="alert-danger">{{ title }}</span>
+                </div>
+            </div>
+            <form enctype="multipart/form-data" method="post" action="{{ action }}">
+                {% csrf_token %}
+                 <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" name="csvfile" id="exampleInputFile">
+                    <p class="help-block">需要指定格式的csv文件，文本文件,文件大小 <= 10M</p>
+                  </div>
+                <br>
+              <button type="submit" class="btn btn-primary btn-block">导入</button>
+            </form>
+        </div>
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

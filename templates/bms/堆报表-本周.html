@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>电池堆信息总览</title>
+    {% include "base-界面head.html" %}
+    <script src="/static/js/Chart.bundle.js" ></script>
+    <script>
+        var data = {
+            labels: {{ days | safe }},
+            datasets: [
+                {
+                    label: "充电量(度)",
+                    backgroundColor: "#449d44",
+                    data: {{ charged_kwh | safe }}
+                },
+                {
+                    label: "放电量(度)",
+                    backgroundColor: "#a94442",
+                    data: {{ discharged_kwh | safe }}
+                }
+            ]
+        };
+
+        $(document).ready(function () {
+            var ctx = $("#kwh_total_table").get(0).getContext("2d");
+            var myBarChart = new Chart(ctx, {type: 'bar', data :data, options: {
+                title: {
+                    display: true,
+                    text: '最近 7天 充放电量统计'
+                }
+            }});
+            myBarChart.update()
+        });
+    </script>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "bms/base-堆tab列表模板.html" %}
+                    </div>
+                </div>
+
+                {% include "bms/base-报表时间段选择模板.html" %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <canvas id="kwh_total_table" width="800px" height="400px"></canvas>
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

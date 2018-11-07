@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/">返回 <span class="glyphicon glyphicon-share-alt"></span></a></li>
+    <li role="presentation"{% if type == "pcs" %} class="active"{% endif %}><a href="/pcs/0/"><strong>{{ pcs_name }}总览</strong></a></li>
+    <li role="presentation"{% if type == "yaotiao" %} class="active"{% endif %}><a href="/pcs/{{ pcs_id }}/yaotiao/">遥调 {% if not request.user.is_superuser %}(只读){% endif %}</a></li>
+    {% if request.user.is_superuser %}
+        <li role="presentation"{% if type == "yaokong" %} class="active"{% endif %}><a href="/pcs/{{ pcs_id }}/yaokong/">遥控 </a></li>
+    {% endif %}
+</ul>

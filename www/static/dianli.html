@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>电力符号测试</title>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/dianli.css" />
+    <script src="/static/js/jquery.js" ></script>
+    <script src="/static/js/dianli.js" ></script>
+    <script src="/static/js/drag.js" ></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand hidden-sm"><span class="glyphicon glyphicon-edit"></span> 页面编辑</a>
+      </div>
+      <div class="navbar-collapse collapse" role="navigation">
+        <ul class="nav navbar-nav">
+            <li><a href="#" id="id_new_group"><span class="glyphicon glyphicon-equalizer"></span>（显示分组）</a></li>
+            <li><a href="#" id="id_new_line_H"><span class="glyphicon glyphicon-resize-horizontal"></span>（水平连线/母线）</a></li>
+            <li><a href="#" id="id_new_line_V"><span class="glyphicon glyphicon-resize-vertical"></span>（垂直连线/母线）</a></li>
+            <li><a href="#" id="id_new_block"><span class="glyphicon glyphicon-th-large"></span>（块状图）</a></li>
+            <li><a href="#" id="id_new_tag"><span class="glyphicon glyphicon-tag"></span>（标签）</a></li>
+            <li><a href="#" id="id_new_image"><span class="glyphicon glyphicon-picture"></span>（电力系统图片）</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right hidden-sm">
+            <li><a href="#" id="id_save"><span class="glyphicon glyphicon-floppy-save"></span> 保存</a></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
+    <div class="container-fluid">
+    </div>
+
+    <div class="modal fade" id="id_img_selector" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-edit"></span> 选择图片类型</h4>
+                </div>
+                <div class="modal-body">
+                    <a img-name="1" href="#" class="img-selector dianli-img-1"></a>
+                    <a img-name="2" href="#" class="img-selector dianli-img-2"></a>
+                    <a img-name="3" href="#" class="img-selector dianli-img-3"></a>
+                    <a img-name="4" href="#" class="img-selector dianli-img-4"></a>
+                    <a img-name="5" href="#" class="img-selector dianli-img-5"></a>
+                    <a img-name="6" href="#" class="img-selector dianli-img-6"></a>
+                    <a img-name="7" href="#" class="img-selector dianli-img-7"></a>
+                    <a img-name="8" href="#" class="img-selector dianli-img-8"></a>
+                    <a img-name="9" href="#" class="img-selector dianli-img-9"></a>
+                    <a img-name="10" href="#" class="img-selector dianli-img-10"></a>
+                    <a img-name="11" href="#" class="img-selector dianli-img-11"></a>
+                    <a img-name="12" href="#" class="img-selector dianli-img-12"></a>
+                    <a img-name="13" href="#" class="img-selector dianli-img-13"></a>
+                    <a img-name="14" href="#" class="img-selector dianli-img-14"></a>
+                    <a img-name="15" href="#" class="img-selector dianli-img-15"></a>
+                    <a img-name="16" href="#" class="img-selector dianli-img-16"></a>
+                    <a img-name="17" href="#" class="img-selector dianli-img-17"></a>
+                    <a img-name="18" href="#" class="img-selector dianli-img-18"></a>
+                </div>
+                <br><br><br><br><br><br>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <div class="modal fade" id="id_tag_selector" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-edit"></span> 选择标签类型</h4>
+                </div>
+                <div class="modal-body">
+                    <a href="#" class="tag-selector tag-lable">标签</a>
+                    <a href="#" class="tag-selector tag-yc-value">遥测</a>
+                    <a href="#" class="tag-selector tag-yx-value">遥信</a>
+                </div>
+                <br><br><br><br><br><br>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+
+<script type="text/javascript">
+</script>
+</body>
+</html>

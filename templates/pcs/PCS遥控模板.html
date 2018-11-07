@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <title>电池堆信息总览</title>
+    <style>
+        .switch input {
+            display: none;
+        }
+        .switch-default {
+            background-color: #cccccc;
+            border-radius: 8px;
+//            width: 120px;
+            height: 20px;
+            line-height: 25px;
+            color: #777777;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .switch-sm {
+            width: 100px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .switch-lg {
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .switch-value:hover {
+            color: #f0f0f0;
+            cursor: pointer;
+        }
+        .switch-value {
+            float: left;
+            width: 50px;
+            background-color: #777777;
+        }
+        .switch-active {
+            color: #ffffff;
+            background-color: #0af05b;
+        }
+        .switch-active:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                {% include "pcs/base-tab列表模板.html" %}
+            </div>
+        </div>
+
+        <table class="table">
+            <caption>{{ pcs_name }}遥控</caption>
+            <tr>
+                <th>#</th>
+                <td>名称</td>
+                <th>状态/控制</th>
+            </tr>
+            {% for yaokong in yaokong_list %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ yaokong.name }}</td>
+                <td class="text-right">
+                    <div class="btn-group" role="group" aria-label="...">
+                        {% for option in yaokong.options %}
+                        <a href="/pcs/{{ pcs_id }}/yaokong/?{{ yaokong.name }}={{ option.value }}" type="button" class="btn {% if yaokong.value == option.value %}btn-primary"{% else %}btn-default"{% endif %}>{{ option.name }}</a>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

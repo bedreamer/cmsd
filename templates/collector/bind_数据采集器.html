@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图标绑定数据源</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/page/"><span class="glyphicon glyphicon-eye-open"></span> 访问首页</a></li>
+                <li><a href="/collector/new/"><span class="glyphicon glyphicon-plus"></span> 新增</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+    {% if not collector_count %}
+        <div class="alert alert-warning" role="alert">还没有采集器！点击<a href="/collector/new/">这里</a>新建一个!</div>
+    {% else %}
+        <form action="{{ request.path }}" method="post">
+        选择数据源
+        <ol>
+            {% if cid == -1 %}
+            <li><input type="radio" value="-1" checked="true" name="collector"> 不绑定</li>
+            {% else %}
+            <li><input type="radio" value="-1" name="collector"> 不绑定</li>
+            {% endif %}
+
+            {% for collecor in collector_list %}
+                {% if cid == collecor.id %}
+            <li><input type="radio" value="{{ collecor.id }}" checked="true" name="collector"> {{ collecor.name }}</li>
+                {% else %}
+            <li><input type="radio" value="{{ collecor.id }}" name="collector"> {{ collecor.name }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        <div class="form-group">
+            <label for="pageTitle">数据源配置</label>
+            <textarea  class="form-control" rows="4" name="json">{{ grid.datasource }}</textarea>
+            <pre class="help-block" style="text-align: left">
+                数据格式如下：
+                ===begin===
+                {
+                    "name": "电池充电曲线",
+                    "datasource": 1,
+                    "legs_maps": [
+                        {
+                            "1#": "电池电压",
+                            "color": "#ffffff"
+                        },
+                        {
+                            "2#": "电池电流",
+                            "color": "#ffffff"
+                        },
+                    ]
+                }
+                ===end===
+                其中name为当前图表的名称， records表示当前图表最大显示的点个数，legs_maps表示数据集和显示曲线之间的映射关系
+                "1#", "2#"分别表示数据源中第一个数据点和第二个数据点，其他的以此类推， "电池电压", "电池电流"表示曲线名，
+                color: 为当前曲线的颜色
+            </pre>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">确 定</button>
+        </form>
+    {% endif %}
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

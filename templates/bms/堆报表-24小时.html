@@ -1,0 +1,92 @@
+{% load userfileter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>电池堆信息总览</title>
+    {% include "base-界面head.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "bms/base-堆tab列表模板.html" %}
+                    </div>
+                </div>
+
+                {% include "bms/base-报表时间段选择模板.html" %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-bordered table-condensed table-striped".>
+                    <tr>
+                        <th rowspan="2"><br>时间段</th>
+                        <th rowspan="2"><br>充电量</th>
+                        <th rowspan="2"><br>放电量</th>
+                        <th colspan="2">堆SOC(%)</th>
+                        <th colspan="2">堆电压(V)</th>
+                        <th colspan="2">堆电流(A)</th>
+                        <th colspan="2">最高单体电压</th>
+                        <th colspan="2">最低单体电压</th>
+                        <th colspan="2">最高单体温度</th>
+                        <th colspan="2">最低单体温度</th>
+                    </tr>
+                    <tr>
+                        <th>最大</th>
+                        <th>最小</th>
+                        <th>最大</th>
+                        <th>最小</th>
+                        <th>最大</th>
+                        <th>最小</th>
+                        <th>值(V)</th>
+                        <th>组号</th>
+                        <th>值(V)</th>
+                        <th>组号</th>
+                        <th>值(℃)</th>
+                        <th>组号</th>
+                        <th>值(℃)</th>
+                        <th>组号</th>
+                    </tr>
+                    {% for record in records_list %}
+                    <tr>
+                        <td>{{ record.time_range }}</td>
+                        <td>{{ record.充电量|zoom:2 }}</td>
+                        <td>{{ record.放电量|zoom:2 }}</td>
+
+                        <td>{{ record.堆SOC_最大值|zoom:2 }}</td>
+                        <td>{{ record.堆SOC_最小值|zoom:2 }}</td>
+
+                        <td>{{ record.堆电压_最大值|zoom:2 }}</td>
+                        <td>{{ record.堆电压_最小值|zoom:2 }}</td>
+
+                        <td>{{ record.堆电流_最大值|zoom:2 }}</td>
+                        <td>{{ record.堆电流_最小值|zoom:2 }}</td>
+
+                        <td>{{ record.最高单体电压_值|zoom:3 }}</td>
+                        <td>{{ record.最高单体电压_组编号 }}</td>
+
+                        <td>{{ record.最低单体电压_值|zoom:3 }}</td>
+                        <td>{{ record.最低单体电压_组编号 }}</td>
+
+                        <td>{{ record.最高单体温度_值|zoom:2 }}</td>
+                        <td>{{ record.最高单体温度_组编号 }}</td>
+
+                        <td>{{ record.最低单体温度_值|zoom:2 }}</td>
+                        <td>{{ record.最低单体温度_组编号 }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

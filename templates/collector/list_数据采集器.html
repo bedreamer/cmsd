@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面管理</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/page/"><span class="glyphicon glyphicon-eye-open"></span> 访问首页</a></li>
+                <li><a href="/collector/new/"><span class="glyphicon glyphicon-plus"></span> 新增</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if total > 0 %}
+            <table class="table center">
+            <tr>
+                <th>id</th>
+                <th>名称</th>
+                <th>协议类型</th>
+                <th>主机地址</th>
+                <th>apipaths</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            {% for collector in collectors %}
+                <tr>
+                    <td>{{ collector.id }}</td>
+                    <td>{{ collector.name }}</td>
+                    <td>{{ collector.protocol }}</td>
+                    <td>{{ collector.host }}</td>
+                    <td style="font-size: 5px;"><pre>{{ collector.apipaths }}</pre></td>
+
+                    {% if collector.disabled %}
+                        <td><a href="/collector/{{ collector.id }}/disabled/toggle"><span style="color: #FF0000" class="glyphicon glyphicon-remove-sign"></span></a> 禁用</td>
+                    {% else %}
+                        <td><a href="/collector/{{ collector.id }}/disabled/toggle"><span style="color: #00ff00" class="glyphicon glyphicon-ok-sign"></span></a> 启用</td>
+                    {% endif %}
+
+                    <td>
+                        <a href="/collector/{{ collector.id }}/data/"><span class="glyphicon glyphicon-send"></span></a>&nbsp;
+                        <a href="/collector/{{ collector.id }}/delete/"><span class="glyphicon glyphicon-remove"></span></a>&nbsp;
+                        <a href="/collector/{{ collector.id }}/"><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">还没有采集器！点击<a href="/collector/new/">这里</a>新建一个!</div>
+        {% endif %}
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

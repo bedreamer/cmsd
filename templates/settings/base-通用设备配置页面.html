@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+    {% include "settings/base-设置导航栏v2.0.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-9">
+                <form class="form-horizontal" method="post" action="{{ request.path }}">
+                    <table class="table table-condensed">
+                    <caption><h3><span class="glyphicon glyphicon-wrench"></span>BMS参数配置</h3></caption>
+                    <tr>
+                        <th>#</th>
+                        <th>BMS型号</th>
+                        <th>通讯地址</th>
+                        <th>BCMU个数<small>(0-16)</small></th>
+                        <th>电池节数<small>(0-400)</small></th>
+                    </tr>
+                    {% for item in configure.items_list %}
+                        <tr>
+                            <th>
+                                <kbd style="font-size: 20px;">{{ forloop.counter }}#BMS</kbd>
+                            </th>
+                            <td>
+                                <select style="width: 100%; height: 30px;" name="BMS类型[]">
+                                    <option value="高特">高特</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="BMS通讯地址[]" value="tcp://192.168.2.123:502" />
+                            </td>
+                            <td>
+                                <input type="number" name="BCMU数量[]" class="form-control" min="0" max="16" value="0"/>
+                            </td>
+                            <td>
+                                <input type="number" name="电池数量[]" class="form-control" min="0" max="400" value="0"/>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                    <input type="submit" id="commit-button" value="提交" class="hide">
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

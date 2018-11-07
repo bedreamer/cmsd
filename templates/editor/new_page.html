@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/jquery.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <img class="navbar-brand" href="#" src="/static/imgs/logo.png" />
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="/editor/page/"><span class="glyphicon glyphicon-share-alt"></span> 取消新增</a></li>
+                <li><a href="/admin/logout/?next=/page/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="center-block">
+            <form method="post" action="/editor/page/new/">
+                {% csrf_token %}
+              <div class="form-group">
+                <label for="pageTitle">页面标题</label>
+                <input type="text" class="form-control" id="id_title" name="title" value="{{ page.title }}">
+              </div>
+              <div class="form-group">
+                <label for="pageTitle">页面名称</label>
+                <input type="text" class="form-control" id="id_title" name="name" value="{{ page.name }}">
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">页面模板</label>
+                <label for="pageTitle">页面模板</label>
+                  <select style="height: 30px;" class="selectpicker" name="template">
+                      {% for name in templates %}
+                          {% if name == page.template %}
+                          <option selected=true value="{{ name }}">{{ name }}</option>
+                          {% else %}
+                          <option value="{{ name }}">{{ name }}</option>
+                          {% endif %}
+                      {% endfor %}
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="pageTitle">设备索引编号</label>
+                <input type="number" name="devicesn" value="{{ page.devicesn }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="pageTitle">js文件列表<small>(多个用;区分)</small></label>
+                <textarea class="form-control" name="jsfiles" rows="2" value="{{ page.jsfiles }}"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">css文件列表<small>(多个用;区分)</small></label>
+                <textarea class="form-control" name="cssfiles" rows="2" value="{{ page.cssfiles }}"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">显示序号</label>
+                <input type="number" name="display_order" value="{{ page.display_order }}">
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">显示控制</label>
+                  {% if page.display %}
+                  <input type="radio" value="on" name="display" checked=true> 显示
+                  <input type="radio" value="off" name="display"> 隐藏
+                  {% else %}
+                  <input type="radio" value="on" name="display"> 显示
+                  <input type="radio" value="off" name="display" checked=true> 隐藏
+                  {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="pageTitle">页面json参数</label>
+                <textarea class="form-control" name="json" rows="5" value="{{ page.json }}"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">创建</button>
+            </form>
+        </div>
+    </div>
+
+<script rel="stylesheet" src="/static/js/bootstrap.js" ></script>
+</body>
+</html>

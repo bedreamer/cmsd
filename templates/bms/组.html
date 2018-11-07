@@ -1,0 +1,174 @@
+{% load userfileter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "base-界面head.html" %}
+    <meta http-equiv="refresh" content="15">
+    <style>
+        .circle {
+            font-size: 30px;
+            line-height: 50px;
+            padding: 5px;
+            margin: 5px;
+            color: #ffffff;
+            background-color: #cccccc;
+            border-color: #ff0000;
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 25px;
+        }
+
+        .circle-positive {
+            background-color: #ffba13;
+            border-color: #2eaaff;
+        }
+
+        .circle-nagtive {
+            background-color: #2eaaff;
+            border-color: #ffba13;
+        }
+
+        .circle-danger {
+            background-color: #f00000;
+            border-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% include "bms/base-组tab列表模板.html" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <div><strong>摘要</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <!--组电压-->
+                        <div style="border-radius: 60px; border-style: solid; border-style: solid; border-color: #2eaaff">
+                            <span class="text-info" style="font-size: 40px;">{{ group_V|zoom:2 }}</span>V
+                        </div>
+                        <h4>组电压</h4>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <!--组电流-->
+                        <div style="border-radius: 60px; border-style: solid; border-style: solid; border-color: #17ff21">
+                            <span class="text-danger" style="font-size: 40px;">{{ group_I|zoom:2 }}</span>A
+                        </div>
+                        <h4>组电流</h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <!--组SOC-->
+                        <div style="border-radius: 60px; border-style: solid; border-style: solid; border-color: #2b669a">
+                            <span class="text-success" style="font-size: 40px;">{{ group_SOC|zoom:2 }}</span>%
+                        </div>
+                        <h4>组SOC</h4>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <!--组SOH-->
+                        <div style="border-radius: 60px; border-style: solid; border-style: solid; border-color: #761c19">
+                            <span class="text-primary" style="font-size: 40px;">{{ group_SOH|zoom:2 }}</span>%
+                        </div>
+                        <h4>组SOH</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-offset-1 col-sm-7">
+                <div>&nbsp;</div>
+                <div class="row text-center">
+                    <div class="col-sm-4">
+                        <span class="circle circle-positive glyphicon glyphicon-cloud-download"></span>
+                        <br>
+                        <span>已充电 <strong>{{ group_charge_count }}</strong> 次</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="circle circle-nagtive glyphicon glyphicon-cloud-upload"></span>
+                        <br>
+                        <span>已放电 <strong>{{ group_discharge_count }}</strong> 次</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="circle circle-danger glyphicon glyphicon-flash"></span>
+                        <br>
+                        <span>储能 <strong>{{ group_available_cap|zoom:2 }}</strong> kWh</span>
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-5">
+                        <h5>累计充电容量：<b class="text-info">{{ group_charge_cap|zoom:1 }}</b> kWh</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>单体平均温度：<b class="text-info">{{ group_average_T|zoom:2 }}</b> ℃</h5>
+                    </div>
+                </div>
+                 <hr>
+               <div class="row">
+                    <div class="col-sm-offset-1 col-sm-5">
+                        <h5>累计放电容量：<b class="text-info">{{ group_discharge_cap|zoom:1 }}</b> kWh</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>单体平均电压：<b class="text-info">{{ group_average_V|zoom:3 }}</b> V</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <table class="table table-bordered text-center" style="font-size: 20px;">
+                <caption>统计</caption>
+                <tr>
+                    <td><b>项</b></td>
+                    <td><b>最高值</b></td>
+                    <td><b>最低值</b></td>
+                    <td><b>单位</b></td>
+                </tr>
+                <tr>
+                    <td>单体电压</td>
+                    <td class="text-danger">{{ group_V_max|zoom:3 }}</td>
+                    <td class="text-success">{{ group_V_min|zoom:3 }}</td>
+                    <td>{{ "V" }}</td>
+                </tr>
+                <tr>
+                    <td>单体温度</td>
+                    <td class="text-danger">{{ group_T_max|zoom:2 }}</td>
+                    <td class="text-success">{{ group_T_min|zoom:2 }}</td>
+                    <td>{{ "℃" }}</td>
+                </tr>
+                <tr>
+                    <td>单体SOC</td>
+                    <td class="text-danger">{{ group_SOC_max|zoom:2 }}</td>
+                    <td class="text-success">{{ group_SOC_min|zoom:2 }}</td>
+                    <td>{{ "%" }}</td>
+                </tr>
+                <tr>
+                    <td>单体SOH</td>
+                    <td class="text-danger">{{ group_SOH_max|zoom:2 }}</td>
+                    <td class="text-success">{{ group_SOH_min|zoom:2 }}</td>
+                    <td>{{ "%" }}</td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>

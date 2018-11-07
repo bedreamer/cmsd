@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "settings/base-html头部.html" %}
+</head>
+<body>
+    {% include "base-界面顶部标题栏.html" %}
+    {% include "settings/base-设置导航栏v2.0.html" %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <h1><span class="glyphicon glyphicon-wrench"></span> {{ processor.title }}</h1>
+                <hr>
+            </div>
+        </div>
+
+        {% if processor.have_children %}
+        <div class="row text-center">
+            <ul class="pagination">
+                {% for subid in processor.children_id_list %}
+                    <li {% if subid == processor.subid %}class="active" {% endif %}><a href="{{ request.path }}?subid={{ subid }}">{{ subid | add:"1" }}#</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-9">
+                {% if processor.have_children %}
+                <form action="{{ request.path }}?subid={{ processor.subid }}" method="post">
+                {% else %}
+                <form action="{{ request.path }}" method="post">
+                {% endif %}
+                {% for item in processor.items_list %}
+                    <div class="row">
+                        {{ item | safe }}
+                    <hr>
+                    </div>
+                {% endfor %}
+                    <input type="submit" id="commit-button" value="提交" class="hide">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/bootstrap.js"></script>
+</body>
+</html>
