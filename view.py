@@ -25,3 +25,13 @@ def index(request, msg, id):
     return msg + str(id)
 
 
+@path.route(path='/live/', method=['GET'])
+def live(request):
+    check_head_pairs = {
+        'Upgrade': 'websocket',
+        'Connection': 'Upgrade'
+    }
+
+    key = request.headers['Sec-WebSocket-Key']
+    version = request.headers['Sec-WebSocket-Version']
+    return HttpResponseWebSocket(key, version)

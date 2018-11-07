@@ -69,7 +69,11 @@ class HttpRequest:
         data = self.read(2048)
         if len(data) == 0:
             self.mark_down()
-            return
+            if self.response is None:
+                return
+            else:
+                self.response.on_connection_down(self)
+                return
         elif self.response is None:
             self.receive_bytes = b''.join([self.receive_bytes, data])
             terminal_idx = self.receive_bytes.find(b'\r\n\r\n')
