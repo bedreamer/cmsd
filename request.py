@@ -72,7 +72,7 @@ class HttpRequest:
             return
         elif self.response is None:
             self.receive_bytes = b''.join([self.receive_bytes, data])
-            terminal_idx = self.receive_bytes.index(b'\r\n\r\n')
+            terminal_idx = self.receive_bytes.find(b'\r\n\r\n')
             if terminal_idx < 0:
                 return
 
@@ -98,8 +98,14 @@ class HttpRequest:
         if len(remain_bytes) > 0:
             response.on_body_received(self, remain_bytes)
 
-        print(time.strftime("[%Y-%m-%d %H:%M:%S]"), self.method, self.path, response.code)
+        print(time.strftime("[%Y-%m-%d %H:%M:%S]"), self.method, self.path, response.code, response.status)
         return response
+
+    def get_cookie(self):
+        if 'Cookie' not in self.headers:
+            return dict()
+        else:
+            pass
 
     def on_writable(self):
         """
@@ -136,5 +142,5 @@ class HttpRequest:
         if self.conn:
             self.conn.close()
             self.conn = None
-            print("closed.")
+            #print("closed.")
 

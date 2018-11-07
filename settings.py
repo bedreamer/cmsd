@@ -3,6 +3,11 @@ __author__ = 'lijie'
 import os
 
 
+# 服务器参数
+server_iface = '127.0.0.1'
+server_port = 8000
+
+
 # 模板目录位置
 template_dirs = [
     os.path.abspath(__file__).strip(os.path.basename(__file__)) + 'templates'

@@ -2,6 +2,7 @@
 __author__ = 'lijie'
 import select
 import socket
+import settings
 from selector import Selector
 from request import HttpRequest
 
@@ -46,7 +47,7 @@ class TCPServerBasic(object):
             print("new connection aborted by", self.RequestHandle.__name__)
             connection.end()
         else:
-            print("new connection accepted.")
+            #print("new connection accepted.")
             connection.setup(self.loop)
 
     def on_writable(self):
@@ -60,5 +61,7 @@ class TCPServerBasic(object):
 
 
 if __name__ == '__main__':
-    server = TCPServerBasic('127.0.0.1', 8000, HttpRequest)
+    print("load configuration from settings.py")
+    print("you can access this site by: http://%s:%d/"%(settings.server_iface, settings.server_port))
+    server = TCPServerBasic(settings.server_iface, settings.server_port, HttpRequest)
     server.run_forever()
